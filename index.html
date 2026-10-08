@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f5ee">
+    <meta name="description" content="Clique, fais tourner la roulette et collectionne des hamsters toujours plus rentables.">
+    <title>Hamster Roulette — le clicker qui a du poil</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="hamster-catalog.js" defer></script>
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <header class="game-hud" aria-label="Statistiques">
+      <div class="balance-display"><span aria-hidden="true">◈</span><strong id="coins">0</strong></div>
+      <div class="rate-display">
+        <span><b id="click-value">1</b><small>PAR CLIC</small></span>
+        <i></i>
+        <span><b id="income">0</b><small>PAR SECONDE</small></span>
+      </div>
+    </header>
+
+    <main class="game-world">
+      <button class="cube-button" id="click-cube" type="button" aria-label="Cliquer pour gagner des pièces">
+        <span class="cube-glow" aria-hidden="true"></span>
+        <span class="cube-scene" aria-hidden="true">
+          <span class="cube">
+            <span class="cube-face cube-top"></span>
+            <span class="cube-face cube-left"></span>
+            <span class="cube-face cube-right"></span>
+            <span class="cube-face cube-front">🐹</span>
+          </span>
+        </span>
+      </button>
+      <div class="hamster-swarm" id="hamster-swarm" aria-label="Hamsters de ta collection"></div>
+      <button class="upgrade-orb" id="click-upgrade" type="button" aria-label="Améliorer la valeur du clic">
+        <span aria-hidden="true">👆</span><b id="upgrade-cost">20</b>
+        <span class="upgrade-level" id="upgrade-level">Niv. 0</span>
+      </button>
+      <button class="roulette-orb" id="roulette-toggle" type="button" aria-label="Ouvrir la roulette">
+        <span aria-hidden="true">🎰</span><b id="spin-cost">35</b>
+      </button>
+    </main>
+
+    <div class="roulette-modal" id="roulette-modal" role="dialog" aria-modal="true" aria-labelledby="roulette-heading" aria-hidden="true">
+      <button class="modal-backdrop" id="modal-backdrop" type="button" aria-label="Fermer la roulette"></button>
+      <section class="roulette-panel">
+        <button class="modal-close" id="modal-close" type="button" aria-label="Fermer">×</button>
+        <p class="roulette-eyebrow">HAMSTER ROULETTE</p>
+        <h1 id="roulette-heading">À toi la chance.</h1>
+        <div class="reel-window" id="wheel-stage">
+          <span class="reel-pointer" aria-hidden="true"></span>
+          <div class="reel-track" id="reel-track"></div>
+        </div>
+        <p class="wheel-result" id="wheel-result" aria-live="polite">La prochaine star de ta tribu ?</p>
+        <div class="rarity-legend" aria-label="Probabilités">
+          <span class="legend-common">Commun 58 %</span>
+          <span class="legend-rare">Rare 26 %</span>
+          <span class="legend-epic">Épique 11 %</span>
+          <span class="legend-legendary">Légendaire 4 %</span>
+          <span class="legend-mythic">Mythique 1 %</span>
+        </div>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
