@@ -422,21 +422,55 @@ body {
 .cube-right { transform: rotateY(90deg) translateZ(clamp(56px, 7.5vw, 78px)); border-radius: 15px; }
 .cube-button:hover .cube-scene { transform: translateY(-5px) scale(1.49); }
 .cube-button:active .cube-scene { transform: translateY(5px) scale(1.4); }
-.hamster-swarm { position: fixed; z-index: 2; inset: 82px 0 0; overflow: hidden; pointer-events: none; }
+.hamster-swarm { position: fixed; z-index: 2; inset: 82px 0 0; overflow: hidden; pointer-events: none; user-select: none; }
 .hamster-sprite {
   position: absolute;
-  top: var(--sprite-top);
-  left: var(--sprite-side);
+  top: 0;
+  left: 0;
   width: clamp(42px, 7vw, 82px);
   height: clamp(56px, 9vw, 102px);
   display: grid;
   place-items: center;
   margin: 0;
+  isolation: isolate;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: grab;
+  will-change: transform;
+}
+.hamster-sprite::before {
+  position: absolute;
+  z-index: -1;
+  inset: -34%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, var(--hamster-aura) 0%, transparent 70%);
+  content: "";
+  opacity: .45;
+  filter: blur(8px);
+  animation: hamster-aura 3s ease-in-out var(--sprite-delay) infinite alternate;
+}
+.hamster-art {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
   animation: hamster-bob 4s ease-in-out var(--sprite-delay) infinite;
   filter: drop-shadow(0 5px 6px rgba(65, 61, 45, .14));
 }
-.hamster-sprite:nth-child(even) { right: var(--sprite-side); left: auto; }
-.hamster-sprite img { width: 100%; height: 100%; border-radius: 48%; object-fit: contain; mix-blend-mode: multiply; }
+.hamster-sprite img { width: 100%; height: 100%; border-radius: 48%; object-fit: contain; mix-blend-mode: multiply; pointer-events: none; }
+.hamster-sprite.is-dragging { z-index: 4; cursor: grabbing; }
+.hamster-sprite.is-dragging .hamster-art { animation-play-state: paused; }
+.rarity-border-common { --hamster-aura: rgba(125, 177, 100, .78); --aura-min-opacity: .2; --aura-max-opacity: .43; }
+.rarity-border-rare { --hamster-aura: rgba(87, 161, 222, .86); --aura-min-opacity: .32; --aura-max-opacity: .6; }
+.rarity-border-epic { --hamster-aura: rgba(163, 108, 222, .92); --aura-min-opacity: .42; --aura-max-opacity: .72; }
+.rarity-border-legendary { --hamster-aura: rgba(245, 169, 65, 1); --aura-min-opacity: .54; --aura-max-opacity: .84; }
+.rarity-border-mythic { --hamster-aura: rgba(244, 91, 157, 1); --aura-min-opacity: .66; --aura-max-opacity: .96; }
+.rarity-border-rare::before { filter: blur(10px); }
+.rarity-border-epic::before { filter: blur(12px); }
+.rarity-border-legendary::before { filter: blur(14px); }
+.rarity-border-mythic::before { filter: blur(16px); }
 .hamster-sprite figcaption {
   position: absolute;
   right: 0;
@@ -448,6 +482,7 @@ body {
   color: #4e5446;
   font-size: 8px;
   font-weight: 800;
+  pointer-events: none;
 }
 .upgrade-orb, .roulette-orb {
   position: fixed;
@@ -549,6 +584,7 @@ body {
 .legend-mythic::before { background: #d7789c; }
 .toast { z-index: 30; }
 @keyframes hamster-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-9px) rotate(2deg); } }
+@keyframes hamster-aura { from { transform: scale(.88); opacity: var(--aura-min-opacity, .3); } to { transform: scale(1.12); opacity: var(--aura-max-opacity, .78); } }
 @media (max-width: 600px) {
   .game-hud { height: 70px; padding: 0 17px; }
   .rate-display { gap: 13px; }
@@ -572,5 +608,5 @@ body {
   .rarity-legend { flex-wrap: wrap; padding: 0 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hamster-sprite { animation: none; }
+  .hamster-art, .hamster-sprite::before { animation: none; }
 }
