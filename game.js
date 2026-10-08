@@ -211,12 +211,13 @@ function spinRoulette() {
   const from = `translateX(${centerOffset}px)`;
   const to = `translateX(${elements.wheelStage.clientWidth / 2 - winnerCard.offsetLeft - winnerCard.offsetWidth / 2}px)`;
   elements.reelTrack.style.transform = from;
-  const animation = elements.reelTrack.animate(
+  const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 100 : 5600;
+  elements.reelTrack.animate(
     [{ transform: from }, { transform: to }],
-    { duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 100 : 5600, easing: "cubic-bezier(.08,.72,.12,1)", fill: "forwards" }
+    { duration, easing: "cubic-bezier(.08,.72,.12,1)", fill: "forwards" }
   );
 
-  animation.finished.then(() => {
+  window.setTimeout(() => {
     const previousLevel = state.hamsters[hamster.id] || 0;
     state.coins -= cost;
     state.roulettePurchases += 1;
@@ -231,12 +232,7 @@ function spinRoulette() {
     updateDisplay();
     saveState();
     showToast(previousLevel ? `Doublon ! ${hamster.name} passe niveau ${previousLevel + 1}.` : `${hamster.name} rejoint ta tribu !`);
-  }).catch(error => {
-    console.error("La roulette n'a pas pu terminer son animation.", error);
-    elements.rouletteToggle.dataset.spinning = "false";
-    updateDisplay();
-    showToast("La roulette a rencontré un problème d’animation.");
-  });
+  }, duration + 100);
 }
 
 elements.cube.addEventListener("click", handleClick);
