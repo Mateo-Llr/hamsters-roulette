@@ -122,7 +122,7 @@ function getUpgradeCost() {
 }
 
 function getSpinCost() {
-  return Math.floor(35 * (1.52 ** state.roulettePurchases));
+  return Math.floor(25 * (1.25 ** state.roulettePurchases));
 }
 
 function updateDisplay() {
