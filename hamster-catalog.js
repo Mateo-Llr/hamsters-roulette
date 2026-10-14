@@ -67,9 +67,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-012",
-    "name": "Hamster 012",
+    "name": "Vieux",
     "rarity": "common",
-    "image": "hamsters/476738800_17917483278057476_2439727386455987772_n.jpg"
+    "image": "hamsters/vieux.jpg"
   },
   {
     "id": "hamster-013",
@@ -139,9 +139,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-024",
-    "name": "Hamster 024",
+    "name": "Rubik's Cube",
     "rarity": "common",
-    "image": "hamsters/484904848_17922216201057476_5675647292026947908_n.jpg"
+    "image": "hamsters/rubiks-cube.jpg"
   },
   {
     "id": "hamster-025",
@@ -181,9 +181,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-031",
-    "name": "Hamster 031",
+    "name": "Dans son cercueil",
     "rarity": "common",
-    "image": "hamsters/487753734_17923827993057476_4802945215131847816_n.jpg"
+    "image": "hamsters/dans-son-cercueil.jpg"
   },
   {
     "id": "hamster-032",
@@ -229,9 +229,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-039",
-    "name": "Hamster 039",
+    "name": "Vert fluo",
     "rarity": "common",
-    "image": "hamsters/494748724_17927017251057476_5547104189663910317_n.jpg"
+    "image": "hamsters/vert-fluo.jpg"
   },
   {
     "id": "hamster-040",
@@ -259,9 +259,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-044",
-    "name": "Hamster 044",
+    "name": "Sous appareil respiratoire",
     "rarity": "common",
-    "image": "hamsters/499603232_17929286712057476_7876410809077028089_n.jpg"
+    "image": "hamsters/sous-appareil-respiratoire.jpg"
   },
   {
     "id": "hamster-045",
@@ -315,157 +315,157 @@ const HAMSTERS = [
     "id": "hamster-053",
     "name": "Hamster 053",
     "rarity": "common",
-    "image": "hamsters/504158373_17931453915057476_7965993444881317101_n.jpg"
+    "image": "hamsters/suzie.jpg"
   },
   {
     "id": "hamster-054",
-    "name": "Hamster 054",
+    "name": "Ralsei",
     "rarity": "common",
-    "image": "hamsters/504384418_17931453906057476_2135472778964003663_n.jpg"
+    "image": "hamsters/ralsei.jpg"
   },
   {
     "id": "hamster-055",
-    "name": "Hamster 055",
+    "name": "Kris",
     "rarity": "common",
-    "image": "hamsters/504489712_17931453897057476_1298884831095359515_n.jpg"
+    "image": "hamsters/kris.jpg"
   },
   {
     "id": "hamster-056",
-    "name": "Hamster 056",
+    "name": "Regard intense",
     "rarity": "common",
-    "image": "hamsters/505745772_17931913743057476_4305761445072216661_n.jpg"
+    "image": "hamsters/regard-intense.jpg"
   },
   {
     "id": "hamster-057",
-    "name": "Hamster 057",
+    "name": "Joues roses",
     "rarity": "common",
-    "image": "hamsters/508655111_17932400967057476_970397636475990684_n.jpg"
+    "image": "hamsters/joues-roses.jpg"
   },
   {
     "id": "hamster-058",
-    "name": "Hamster 058",
+    "name": "Regard noir",
     "rarity": "common",
-    "image": "hamsters/514801119_17934302889057476_4897747127019491537_n.jpg"
+    "image": "hamsters/regard-noir.jpg"
   },
   {
     "id": "hamster-059",
-    "name": "Hamster 059",
+    "name": "Petit sourire",
     "rarity": "common",
-    "image": "hamsters/515265153_17934302892057476_4164570460958109284_n.jpg"
+    "image": "hamsters/petit-sourire.jpg"
   },
   {
     "id": "hamster-060",
-    "name": "Hamster 060",
+    "name": "Joues poudrées",
     "rarity": "common",
-    "image": "hamsters/520586630_17935970349057476_784261184986580662_n.jpg"
+    "image": "hamsters/joues-poudrees.jpg"
   },
   {
     "id": "hamster-061",
-    "name": "Hamster 061",
+    "name": "Biggest Eater",
     "rarity": "common",
-    "image": "hamsters/523387244_17936547420057476_1156027957153672581_n.jpg"
+    "image": "hamsters/biggest-eater.jpg"
   },
   {
     "id": "hamster-062",
-    "name": "Hamster 062",
+    "name": "Grand sourire",
     "rarity": "common",
-    "image": "hamsters/524150500_17937020757057476_5220571482056926197_n.jpg"
+    "image": "hamsters/grand-sourire.jpg"
   },
   {
     "id": "hamster-063",
-    "name": "Hamster 063",
+    "name": "Hamster rieur",
     "rarity": "common",
-    "image": "hamsters/526707265_17937464490057476_535244977803197360_n.jpg"
+    "image": "hamsters/hamster-rieur.jpg"
   },
   {
     "id": "hamster-064",
-    "name": "Hamster 064",
+    "name": "Front carré",
     "rarity": "common",
-    "image": "hamsters/528690249_17938377168057476_5842778653220111925_n.jpg"
+    "image": "hamsters/front-carre.jpg"
   },
   {
     "id": "hamster-065",
-    "name": "Hamster 065",
+    "name": "Hamster triste",
     "rarity": "common",
-    "image": "hamsters/528818742_17938377177057476_2457649127598586310_n.jpg"
+    "image": "hamsters/hamster-triste.jpg"
   },
   {
     "id": "hamster-066",
-    "name": "Hamster 066",
+    "name": "Porto Rico",
     "rarity": "common",
-    "image": "hamsters/529779685_17938377186057476_3092528202417249692_n.jpg"
+    "image": "hamsters/porto-rico.jpg"
   },
   {
     "id": "hamster-067",
-    "name": "Hamster 067",
+    "name": "Sourire malicieux",
     "rarity": "common",
-    "image": "hamsters/531003397_17938972785057476_1449747054765701218_n.jpg"
+    "image": "hamsters/sourire-malicieux.jpg"
   },
   {
     "id": "hamster-068",
-    "name": "Hamster 068",
+    "name": "Ballerine",
     "rarity": "common",
-    "image": "hamsters/534518345_17939330133057476_8924057144037548875_n.jpg"
+    "image": "hamsters/ballerine.jpg"
   },
   {
     "id": "hamster-069",
-    "name": "Hamster 069",
+    "name": "Hamster à l'écharpe",
     "rarity": "common",
-    "image": "hamsters/535583324_17939780379057476_1686252101102310896_n.jpg"
+    "image": "hamsters/hamster-a-lecharpe.jpg"
   },
   {
     "id": "hamster-070",
-    "name": "Hamster 070",
+    "name": "Bouquet et larme",
     "rarity": "common",
-    "image": "hamsters/535950314_17939780388057476_5193111627293000667_n.jpg"
+    "image": "hamsters/bouquet-et-larme.jpg"
   },
   {
     "id": "hamster-071",
-    "name": "Hamster 071",
+    "name": "Sourire les yeux fermés",
     "rarity": "common",
-    "image": "hamsters/539564894_17940991332057476_6210253091030433512_n.jpg"
+    "image": "hamsters/sourire-yeux-fermes.jpg"
   },
   {
     "id": "hamster-072",
-    "name": "Hamster 072",
+    "name": "Bouquet de fleurs",
     "rarity": "common",
-    "image": "hamsters/539577629_17940568608057476_8530081881520793773_n.jpg"
+    "image": "hamsters/bouquet-de-fleurs.jpg"
   },
   {
     "id": "hamster-073",
-    "name": "Hamster 073",
+    "name": "Sourire timide",
     "rarity": "common",
-    "image": "hamsters/539964728_17940991335057476_1710296256475803429_n.jpg"
+    "image": "hamsters/sourire-timide.jpg"
   },
   {
     "id": "hamster-074",
-    "name": "Hamster 074",
+    "name": "Regard de côté",
     "rarity": "common",
-    "image": "hamsters/541528333_17941452063057476_6801351960199307623_n.jpg"
+    "image": "hamsters/regard-de-cote.jpg"
   },
   {
     "id": "hamster-075",
-    "name": "Hamster 075",
+    "name": "Hamster au chapeau",
     "rarity": "common",
-    "image": "hamsters/541984858_17941907076057476_6879485601384169076_n.jpg"
+    "image": "hamsters/hamster-au-chapeau.jpg"
   },
   {
     "id": "hamster-076",
-    "name": "Hamster 076",
+    "name": "Grand sourire 2",
     "rarity": "common",
-    "image": "hamsters/544997054_17942324430057476_3704719987888140776_n.jpg"
+    "image": "hamsters/grand-sourire-2.jpg"
   },
   {
     "id": "hamster-077",
-    "name": "Hamster 077",
+    "name": "Hurle",
     "rarity": "common",
-    "image": "hamsters/548899275_17942888658057476_1897784316480932755_n.jpg"
+    "image": "hamsters/hurle.jpg"
   },
   {
     "id": "hamster-078",
-    "name": "Hamster 078",
+    "name": "Che Guevara",
     "rarity": "common",
-    "image": "hamsters/551349018_17943450810057476_6652237630481621185_n.jpg"
+    "image": "hamsters/che-guevara.jpg"
   },
   {
     "id": "hamster-079",
@@ -481,9 +481,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-081",
-    "name": "Hamster 081",
+    "name": "Spider-Man",
     "rarity": "common",
-    "image": "hamsters/559284295_17945372820057476_2796501304613863685_n.jpg"
+    "image": "hamsters/spiderman.jpg"
   },
   {
     "id": "hamster-082",
@@ -517,9 +517,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-087",
-    "name": "Hamster 087",
+    "name": "Doctor House",
     "rarity": "common",
-    "image": "hamsters/567330527_17946809016057476_7799335384651441988_n.jpg"
+    "image": "hamsters/doctor-house.jpg"
   },
   {
     "id": "hamster-088",
@@ -529,15 +529,15 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-089",
-    "name": "Hamster 089",
+    "name": "Bonbons d'Halloween",
     "rarity": "common",
-    "image": "hamsters/572732452_17948041404057476_1274422737726577945_n.jpg"
+    "image": "hamsters/bonbons-halloween.jpg"
   },
   {
     "id": "hamster-090",
-    "name": "Hamster 090",
+    "name": "Rubik's Cube et lunettes",
     "rarity": "common",
-    "image": "hamsters/574456261_17951864877057476_649729854533254789_n.jpg"
+    "image": "hamsters/rubiks-cube-lunettes.jpg"
   },
   {
     "id": "hamster-091",
@@ -577,9 +577,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-097",
-    "name": "Hamster 097",
+    "name": "Coiffeur",
     "rarity": "common",
-    "image": "hamsters/587672294_17950492626057476_7845150595942527783_n.jpg"
+    "image": "hamsters/coiffeur.jpg"
   },
   {
     "id": "hamster-098",
@@ -589,9 +589,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-099",
-    "name": "Hamster 099",
+    "name": "Gros ventre",
     "rarity": "common",
-    "image": "hamsters/588585330_17950775490057476_7354379817404215991_n.jpg"
+    "image": "hamsters/gros-ventre.jpg"
   },
   {
     "id": "hamster-100",
@@ -631,9 +631,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-106",
-    "name": "Hamster 106",
+    "name": "Sapin de Noël",
     "rarity": "common",
-    "image": "hamsters/603660562_17953791981057476_5072466521276562148_n.jpg"
+    "image": "hamsters/sapin-noel.jpg"
   },
   {
     "id": "hamster-107",
@@ -643,21 +643,21 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-108",
-    "name": "Hamster 108",
+    "name": "Bonhomme en pain d'épice",
     "rarity": "common",
-    "image": "hamsters/604395680_17953791984057476_8338221815166385008_n.jpg"
+    "image": "hamsters/bonhomme-pain-depice.jpg"
   },
   {
     "id": "hamster-109",
-    "name": "Hamster 109",
+    "name": "Lutin de Noël",
     "rarity": "common",
-    "image": "hamsters/605825889_17953791996057476_6439218516289594897_n.jpg"
+    "image": "hamsters/lutin-noel-2.jpg"
   },
   {
     "id": "hamster-110",
-    "name": "Hamster 110",
+    "name": "2026",
     "rarity": "common",
-    "image": "hamsters/609573170_17954509113057476_7632737540748105872_n.jpg"
+    "image": "hamsters/2026.jpg"
   },
   {
     "id": "hamster-111",
@@ -685,9 +685,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-115",
-    "name": "Hamster 115",
+    "name": "Muscle",
     "rarity": "common",
-    "image": "hamsters/617599660_17924270538214720_5703311826072269498_n.jpg"
+    "image": "hamsters/muscle.jpg"
   },
   {
     "id": "hamster-116",
@@ -709,9 +709,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-119",
-    "name": "Hamster 119",
+    "name": "Le Grinch",
     "rarity": "common",
-    "image": "hamsters/619610630_17952957384075335_8126972715762743010_n.jpg"
+    "image": "hamsters/grinch.jpg"
   },
   {
     "id": "hamster-120",
@@ -745,9 +745,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-125",
-    "name": "Hamster 125",
+    "name": "Raisins",
     "rarity": "common",
-    "image": "hamsters/619992166_18037054001757132_4451199841481381162_n.jpg"
+    "image": "hamsters/raisins.jpg"
   },
   {
     "id": "hamster-126",
@@ -793,9 +793,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-133",
-    "name": "Hamster 133",
+    "name": "Spider-Man sans bras",
     "rarity": "common",
-    "image": "hamsters/621537994_17923858566072282_7591602270698150982_n.jpg"
+    "image": "hamsters/spiderman-sans-bras.jpg"
   },
   {
     "id": "hamster-134",
@@ -811,9 +811,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-136",
-    "name": "Hamster 136",
+    "name": "Grosses oreilles",
     "rarity": "common",
-    "image": "hamsters/621690325_18091893689068319_4325191423651676035_n.jpg"
+    "image": "hamsters/grosses-oreilles.jpg"
   },
   {
     "id": "hamster-137",
@@ -823,9 +823,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-138",
-    "name": "Hamster 138",
+    "name": "2025",
     "rarity": "common",
-    "image": "hamsters/621704521_18006582896684085_2924425229133894074_n.jpg"
+    "image": "hamsters/2025.jpg"
   },
   {
     "id": "hamster-139",
@@ -841,15 +841,15 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-141",
-    "name": "Hamster 141",
+    "name": "Pizza lover",
     "rarity": "common",
-    "image": "hamsters/622030784_17964229331876511_1188699503431385549_n.jpg"
+    "image": "hamsters/pizza.jpg"
   },
   {
     "id": "hamster-142",
-    "name": "Hamster 142",
+    "name": "Pikmin",
     "rarity": "common",
-    "image": "hamsters/622122084_17982237674954452_4458754107179043696_n.jpg"
+    "image": "hamsters/pikmins.jpg"
   },
   {
     "id": "hamster-143",
@@ -865,9 +865,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-145",
-    "name": "Hamster 145",
+    "name": "Magicien",
     "rarity": "common",
-    "image": "hamsters/622385270_18055213217386820_4785613830649725631_n.jpg"
+    "image": "hamsters/magician.jpg"
   },
   {
     "id": "hamster-146",
@@ -931,9 +931,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-156",
-    "name": "Hamster 156",
+    "name": "Bananas lover",
     "rarity": "common",
-    "image": "hamsters/623946289_18012809090656325_5421123167677952976_n.jpg"
+    "image": "hamsters/bananas.jpg"
   },
   {
     "id": "hamster-157",
@@ -949,9 +949,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-159",
-    "name": "Hamster 159",
+    "name": "Pineapple lover",
     "rarity": "common",
-    "image": "hamsters/624178953_18084890288177730_565277889834980771_n.jpg"
+    "image": "hamsters/pineapple.jpg"
   },
   {
     "id": "hamster-160",
@@ -985,9 +985,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-165",
-    "name": "Hamster 165",
+    "name": "Avatar",
     "rarity": "common",
-    "image": "hamsters/624673735_18092193304823934_8773704074545606028_n.jpg"
+    "image": "hamsters/avatar.jpg"
   },
   {
     "id": "hamster-166",
@@ -1009,9 +1009,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-169",
-    "name": "Hamster 169",
+    "name": "Oranges lover",
     "rarity": "common",
-    "image": "hamsters/624898557_18120862117501498_2213633956791827291_n.jpg"
+    "image": "hamsters/oranges.jpg"
   },
   {
     "id": "hamster-170",
@@ -1057,9 +1057,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-177",
-    "name": "Hamster 177",
+    "name": "Cherries lover",
     "rarity": "common",
-    "image": "hamsters/625169125_18068231330552437_1073515575755348296_n.jpg"
+    "image": "hamsters/cherries.jpg"
   },
   {
     "id": "hamster-178",
@@ -1093,117 +1093,117 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-183",
-    "name": "Hamster 183",
+    "name": "Pastèque",
     "rarity": "common",
-    "image": "hamsters/625962975_18081084469992256_5407030229024226406_n.jpg"
+    "image": "hamsters/pasteque.jpg"
   },
   {
     "id": "hamster-184",
-    "name": "Hamster 184",
+    "name": "Larmes de rire",
     "rarity": "common",
-    "image": "hamsters/625982680_18316463563247269_2906301922139963047_n.jpg"
+    "image": "hamsters/larmes-de-rire.jpg"
   },
   {
     "id": "hamster-185",
-    "name": "Hamster 185",
+    "name": "Pleureur à lunettes",
     "rarity": "common",
-    "image": "hamsters/626115591_18309337909280432_7191790690942180054_n.jpg"
+    "image": "hamsters/pleureur-a-lunettes.jpg"
   },
   {
     "id": "hamster-186",
-    "name": "Hamster 186",
+    "name": "Spider-Man en costume",
     "rarity": "common",
-    "image": "hamsters/626177781_18105225055696483_4229138546849936718_n.jpg"
+    "image": "hamsters/spiderman-costume.jpg"
   },
   {
     "id": "hamster-187",
-    "name": "Hamster 187",
+    "name": "Sourire en coin",
     "rarity": "common",
-    "image": "hamsters/626290059_18162357280413750_5379466422191756411_n.jpg"
+    "image": "hamsters/sourire-en-coin.jpg"
   },
   {
     "id": "hamster-188",
-    "name": "Hamster 188",
+    "name": "Cri d'effroi",
     "rarity": "common",
-    "image": "hamsters/626414912_18054737492700899_7891910677274664972_n.jpg"
+    "image": "hamsters/cri-deffroi.jpg"
   },
   {
     "id": "hamster-189",
-    "name": "Hamster 189",
+    "name": "Crise devant l'ordinateur",
     "rarity": "common",
-    "image": "hamsters/626431664_18087502457138574_9209279844929834060_n.jpg"
+    "image": "hamsters/crise-ordinateur.jpg"
   },
   {
     "id": "hamster-190",
-    "name": "Hamster 190",
+    "name": "Fruit sur la tête",
     "rarity": "common",
-    "image": "hamsters/626532528_18124167388556758_3438747131628809499_n.jpg"
+    "image": "hamsters/fruit-sur-la-tete.jpg"
   },
   {
     "id": "hamster-191",
-    "name": "Hamster 191",
+    "name": "Cheveux longs",
     "rarity": "common",
-    "image": "hamsters/626671966_18077528366366383_4602016293481295582_n.jpg"
+    "image": "hamsters/cheveux-longs.jpg"
   },
   {
     "id": "hamster-192",
-    "name": "Hamster 192",
+    "name": "Crête iroquoise",
     "rarity": "common",
-    "image": "hamsters/627085387_18399031180177715_8934681809695470091_n.jpg"
+    "image": "hamsters/crete-iroquoise.jpg"
   },
   {
     "id": "hamster-193",
-    "name": "Hamster 193",
+    "name": "Monstre aux crocs",
     "rarity": "common",
-    "image": "hamsters/627368966_17958183552057476_6288810418685530862_n.jpg"
+    "image": "hamsters/monstre-aux-crocs.jpg"
   },
   {
     "id": "hamster-194",
-    "name": "Hamster 194",
+    "name": "Petit rat",
     "rarity": "common",
-    "image": "hamsters/627392601_18179088319326658_6231635132992651382_n.jpg"
+    "image": "hamsters/petit-rat.jpg"
   },
   {
     "id": "hamster-195",
-    "name": "Hamster 195",
+    "name": "Hamster allongé",
     "rarity": "common",
-    "image": "hamsters/627544496_17958183543057476_332272488549988846_n.jpg"
+    "image": "hamsters/hamster-allonge.jpg"
   },
   {
     "id": "hamster-196",
-    "name": "Hamster 196",
+    "name": "Médaillon vert",
     "rarity": "common",
-    "image": "hamsters/627674931_18189419233357248_5643542486124201094_n.jpg"
+    "image": "hamsters/medaillon-vert.jpg"
   },
   {
     "id": "hamster-197",
-    "name": "Hamster 197",
+    "name": "Bonhomme de neige",
     "rarity": "common",
-    "image": "hamsters/628035654_18213961141314077_2318474894906447043_n.jpg"
+    "image": "hamsters/bonhomme-de-neige.jpg"
   },
   {
     "id": "hamster-198",
-    "name": "Hamster 198",
+    "name": "Monstre vert",
     "rarity": "common",
-    "image": "hamsters/628127066_18112996741713432_430059648063303321_n.jpg"
+    "image": "hamsters/monstre-vert.jpg"
   },
   {
     "id": "hamster-199",
-    "name": "Hamster 199",
+    "name": "Broly",
     "rarity": "common",
-    "image": "hamsters/628238456_18396809629195982_3335837052512370701_n.jpg"
+    "image": "hamsters/broly.jpg"
   },
   {
     "id": "hamster-200",
-    "name": "Hamster 200",
+    "name": "Sourire calme",
     "rarity": "common",
-    "image": "hamsters/628288840_18303875554274163_2657307628202498119_n.jpg"
+    "image": "hamsters/sourire-calme.jpg"
   },
   {
     "id": "hamster-201",
-    "name": "Hamster 201",
+    "name": "Minion",
     "rarity": "common",
-    "image": "hamsters/628321904_18176769766373278_3716201278371817723_n.jpg"
+    "image": "hamsters/minion-2.jpg"
   },
   {
     "id": "hamster-202",
@@ -1219,9 +1219,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-204",
-    "name": "Hamster 204",
+    "name": "Prisonnier",
     "rarity": "common",
-    "image": "hamsters/629028137_18397637707178140_831644013734042653_n.jpg"
+    "image": "hamsters/prisonner.jpg"
   },
   {
     "id": "hamster-205",
@@ -1237,15 +1237,15 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-207",
-    "name": "Hamster 207",
+    "name": "Peintre",
     "rarity": "common",
-    "image": "hamsters/631647520_18418784443140086_3477129631665864568_n.jpg"
+    "image": "hamsters/peintre.jpg"
   },
   {
     "id": "hamster-208",
-    "name": "Hamster 208",
+    "name": "Pyjama",
     "rarity": "common",
-    "image": "hamsters/632060621_17960026509057476_8610819276831364529_n.jpg"
+    "image": "hamsters/pyjama.jpg"
   },
   {
     "id": "hamster-209",
@@ -1255,9 +1255,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-210",
-    "name": "Hamster 210",
+    "name": "Sans (Undertale)",
     "rarity": "common",
-    "image": "hamsters/632312243_18513384355077253_1413461851155051528_n.jpg"
+    "image": "hamsters/sans-undertale.jpg"
   },
   {
     "id": "hamster-211",
@@ -1267,9 +1267,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-212",
-    "name": "Hamster 212",
+    "name": "Chapeau d'étudiant",
     "rarity": "common",
-    "image": "hamsters/638882235_18563508337038039_3159799886459907682_n.jpg"
+    "image": "hamsters/chapeau-etudiant.jpg"
   },
   {
     "id": "hamster-213",
@@ -1279,21 +1279,21 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-214",
-    "name": "Hamster 214",
+    "name": "Très en colère",
     "rarity": "common",
-    "image": "hamsters/639883813_18562635124032949_2800510759543015250_n.jpg"
+    "image": "hamsters/tres-en-colere.jpg"
   },
   {
     "id": "hamster-215",
-    "name": "Hamster 215",
+    "name": "Scientifique",
     "rarity": "common",
-    "image": "hamsters/640952395_17961203121057476_8554319158078662060_n.jpg"
+    "image": "hamsters/scientifique.jpg"
   },
   {
     "id": "hamster-216",
-    "name": "Hamster 216",
+    "name": "Lecture avec petites lunettes",
     "rarity": "common",
-    "image": "hamsters/641640802_18560925964042566_3521727414743351689_n.jpg"
+    "image": "hamsters/lecture-petites-lunettes.jpg"
   },
   {
     "id": "hamster-217",
@@ -1303,9 +1303,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-218",
-    "name": "Hamster 218",
+    "name": "Hamster en bikini",
     "rarity": "common",
-    "image": "hamsters/642963775_17899221240245300_1663699037450053331_n.jpg"
+    "image": "hamsters/hamster-en-bikini.jpg"
   },
   {
     "id": "hamster-219",
@@ -1321,9 +1321,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-221",
-    "name": "Hamster 221",
+    "name": "Pirate",
     "rarity": "common",
-    "image": "hamsters/648557558_17916602343287020_2217038429902256506_n.jpg"
+    "image": "hamsters/pirate-2.jpg"
   },
   {
     "id": "hamster-222",
@@ -1351,9 +1351,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-226",
-    "name": "Hamster 226",
+    "name": "Shrek",
     "rarity": "common",
-    "image": "hamsters/649816903_17942663511134176_4738273487630857042_n.jpg"
+    "image": "hamsters/shrek-2.jpg"
   },
   {
     "id": "hamster-227",
@@ -1363,129 +1363,129 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-228",
-    "name": "Hamster 228",
+    "name": "Pastèque sur la tête",
     "rarity": "common",
-    "image": "hamsters/650273430_17953970250085293_4293455150894529557_n.jpg"
+    "image": "hamsters/pasteque-sur-la-tete.jpg"
   },
   {
     "id": "hamster-229",
-    "name": "Hamster 229",
+    "name": "Lapin de Pâques",
     "rarity": "common",
-    "image": "hamsters/650365275_17917915197125924_8754034029607508328_n.jpg"
+    "image": "hamsters/lapin-de-paques.jpg"
   },
   {
     "id": "hamster-230",
-    "name": "Hamster 230",
+    "name": "Hamster vert",
     "rarity": "common",
-    "image": "hamsters/650463701_17977496195830701_8924359201613452111_n.jpg"
+    "image": "hamsters/hamster-vert.jpg"
   },
   {
     "id": "hamster-231",
-    "name": "Hamster 231",
+    "name": "Hamster sous la neige",
     "rarity": "common",
-    "image": "hamsters/650478678_17975762768989253_2817083030042214634_n.jpg"
+    "image": "hamsters/hamster-sous-la-neige.jpg"
   },
   {
     "id": "hamster-232",
-    "name": "Hamster 232",
+    "name": "Hamster amoureux",
     "rarity": "common",
-    "image": "hamsters/650656152_17923493055266958_8287702455313099122_n.jpg"
+    "image": "hamsters/hamster-amoureux.jpg"
   },
   {
     "id": "hamster-233",
-    "name": "Hamster 233",
+    "name": "Hamster triste",
     "rarity": "common",
-    "image": "hamsters/650688947_17962463232057476_3865511744523244563_n.jpg"
+    "image": "hamsters/hamster-triste-2.jpg"
   },
   {
     "id": "hamster-234",
-    "name": "Hamster 234",
+    "name": "Hamster en larmes",
     "rarity": "common",
-    "image": "hamsters/651179380_17968201380039973_6095593315791183441_n.jpg"
+    "image": "hamsters/hamster-en-larmes.jpg"
   },
   {
     "id": "hamster-235",
-    "name": "Hamster 235",
+    "name": "Hamster qui rougit",
     "rarity": "common",
-    "image": "hamsters/651319973_18001430390907140_5077611342707541478_n.jpg"
+    "image": "hamsters/hamster-qui-rougit.jpg"
   },
   {
     "id": "hamster-236",
-    "name": "Hamster 236",
+    "name": "Moustachu qui tire la langue",
     "rarity": "common",
-    "image": "hamsters/651455109_17980917011978044_806477769308930976_n.jpg"
+    "image": "hamsters/moustachu-qui-tire-la-langue.jpg"
   },
   {
     "id": "hamster-237",
-    "name": "Hamster 237",
+    "name": "Clown",
     "rarity": "common",
-    "image": "hamsters/651464153_17965632021043286_3381136289364161458_n.jpg"
+    "image": "hamsters/clown.jpg"
   },
   {
     "id": "hamster-238",
-    "name": "Hamster 238",
+    "name": "Hamster joufflu",
     "rarity": "common",
-    "image": "hamsters/651515013_17911839186167653_2726348289619919955_n.jpg"
+    "image": "hamsters/hamster-joufflu.jpg"
   },
   {
     "id": "hamster-239",
-    "name": "Hamster 239",
+    "name": "Hamster triste 2",
     "rarity": "common",
-    "image": "hamsters/651581249_18056768018695800_1906569116662558847_n.jpg"
+    "image": "hamsters/hamster-triste-3.jpg"
   },
   {
     "id": "hamster-240",
-    "name": "Hamster 240",
+    "name": "Hamster aux lunettes grises",
     "rarity": "common",
-    "image": "hamsters/651944590_17934454920081220_4651769293833462715_n.jpg"
+    "image": "hamsters/hamster-aux-lunettes-grises.jpg"
   },
   {
     "id": "hamster-241",
-    "name": "Hamster 241",
+    "name": "Hamster emo",
     "rarity": "common",
-    "image": "hamsters/652001442_18106470616892867_4116739894637111417_n.jpg"
+    "image": "hamsters/hamster-emo-2.jpg"
   },
   {
     "id": "hamster-242",
-    "name": "Hamster 242",
+    "name": "Magicien",
     "rarity": "common",
-    "image": "hamsters/652040969_18015229430823771_7182347999071983599_n.jpg"
+    "image": "hamsters/magicien.jpg"
   },
   {
     "id": "hamster-243",
-    "name": "Hamster 243",
+    "name": "Cowboy",
     "rarity": "common",
-    "image": "hamsters/652083013_18088559767945339_3056699235539872126_n.jpg"
+    "image": "hamsters/cowboy-2.jpg"
   },
   {
     "id": "hamster-244",
-    "name": "Hamster 244",
+    "name": "Hamster moitié sombre",
     "rarity": "common",
-    "image": "hamsters/652085061_17951203251115391_2539045353209626126_n.jpg"
+    "image": "hamsters/hamster-moitie-sombre.jpg"
   },
   {
     "id": "hamster-245",
-    "name": "Hamster 245",
+    "name": "Troglodyte",
     "rarity": "common",
-    "image": "hamsters/652761149_18066631373675548_7608032730552455627_n.jpg"
+    "image": "hamsters/troglodyte.jpg"
   },
   {
     "id": "hamster-246",
-    "name": "Hamster 246",
+    "name": "Grands yeux",
     "rarity": "common",
-    "image": "hamsters/652767831_18061048628375648_4164763740033099055_n.jpg"
+    "image": "hamsters/grands-yeux.jpg"
   },
   {
     "id": "hamster-247",
-    "name": "Hamster 247",
+    "name": "Hamster ivre",
     "rarity": "common",
-    "image": "hamsters/652768328_18076055330570479_5858078721874596515_n.jpg"
+    "image": "hamsters/hamster-ivre.jpg"
   },
   {
     "id": "hamster-248",
-    "name": "Hamster 248",
+    "name": "Grosses lèvres",
     "rarity": "common",
-    "image": "hamsters/652769495_17962997829057476_7883953720917565322_n.jpg"
+    "image": "hamsters/grosses-levres.jpg"
   },
   {
     "id": "hamster-249",
@@ -1507,9 +1507,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-252",
-    "name": "Hamster 252",
+    "name": "Batteur de Gorillaz",
     "rarity": "common",
-    "image": "hamsters/652816350_18070581287642770_3691891381489432190_n.jpg"
+    "image": "hamsters/batteur-gorillaz.jpg"
   },
   {
     "id": "hamster-253",
@@ -1519,9 +1519,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-254",
-    "name": "Hamster 254",
+    "name": "Murdock de Gorillaz",
     "rarity": "rare",
-    "image": "hamsters/652907371_18077681210113873_7091312150156563029_n.jpg"
+    "image": "hamsters/murdock-gorillaz.jpg"
   },
   {
     "id": "hamster-255",
@@ -1549,9 +1549,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-259",
-    "name": "Hamster 259",
+    "name": "Diable malicieux",
     "rarity": "rare",
-    "image": "hamsters/653632818_18040693202752924_5581221093939305117_n.jpg"
+    "image": "hamsters/devil.jpg"
   },
   {
     "id": "hamster-260",
@@ -1591,141 +1591,141 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-266",
-    "name": "Hamster 266",
+    "name": "Hatsune Miku",
     "rarity": "rare",
-    "image": "hamsters/654008749_17959659359918771_7009150627718320192_n.jpg"
+    "image": "hamsters/hastune_miku.jpg"
   },
   {
     "id": "hamster-267",
-    "name": "Hamster 267",
+    "name": "Hamster qui pleure",
     "rarity": "rare",
-    "image": "hamsters/654021097_18071261786559321_2632041645808859106_n.jpg"
+    "image": "hamsters/hamster-qui-pleure.jpg"
   },
   {
     "id": "hamster-268",
-    "name": "Hamster 268",
+    "name": "Bugs Bunny",
     "rarity": "rare",
-    "image": "hamsters/654028683_18055832324651250_205689394813886586_n.jpg"
+    "image": "hamsters/bugs-bunny.jpg"
   },
   {
     "id": "hamster-269",
-    "name": "Hamster 269",
+    "name": "Hamster qui vomit",
     "rarity": "rare",
-    "image": "hamsters/654101631_18157054930442866_9173866522377580910_n.jpg"
+    "image": "hamsters/hamster-qui-vomit.jpg"
   },
   {
     "id": "hamster-270",
-    "name": "Hamster 270",
+    "name": "Hamster lecteur",
     "rarity": "rare",
-    "image": "hamsters/654177546_18098631871986193_7612850778013025901_n.jpg"
+    "image": "hamsters/hamster-lecteur.jpg"
   },
   {
     "id": "hamster-271",
-    "name": "Hamster 271",
+    "name": "Hamster au casque vert",
     "rarity": "rare",
-    "image": "hamsters/654180740_18096038960293044_4181621446268730484_n.jpg"
+    "image": "hamsters/hamster-au-casque-vert.jpg"
   },
   {
     "id": "hamster-272",
-    "name": "Hamster 272",
+    "name": "Petit sourire",
     "rarity": "rare",
-    "image": "hamsters/654201468_18097750441791362_9140759539064595107_n.jpg"
+    "image": "hamsters/petit-sourire-2.jpg"
   },
   {
     "id": "hamster-273",
-    "name": "Hamster 273",
+    "name": "Hamster tire la langue",
     "rarity": "rare",
-    "image": "hamsters/654203667_18066615812322321_7839096230585015048_n.jpg"
+    "image": "hamsters/hamster-tire-la-langue.jpg"
   },
   {
     "id": "hamster-274",
-    "name": "Hamster 274",
+    "name": "Moustachu",
     "rarity": "rare",
-    "image": "hamsters/654214879_18028486907795272_4104264580267156258_n.jpg"
+    "image": "hamsters/moustachu.jpg"
   },
   {
     "id": "hamster-275",
-    "name": "Hamster 275",
+    "name": "Chewbacca",
     "rarity": "rare",
-    "image": "hamsters/654288096_18063149168356728_4679671973477005519_n.jpg"
+    "image": "hamsters/chewbacca.jpg"
   },
   {
     "id": "hamster-276",
-    "name": "Hamster 276",
+    "name": "Hamster balafré",
     "rarity": "rare",
-    "image": "hamsters/654488388_18076795817435996_6713950785821762872_n.jpg"
+    "image": "hamsters/hamster-balafre.jpg"
   },
   {
     "id": "hamster-277",
-    "name": "Hamster 277",
+    "name": "Gros œil",
     "rarity": "rare",
-    "image": "hamsters/654540951_18027298796801084_8994232884563810151_n.jpg"
+    "image": "hamsters/gros-oeil.jpg"
   },
   {
     "id": "hamster-278",
-    "name": "Hamster 278",
+    "name": "Sherlock Holmes",
     "rarity": "rare",
-    "image": "hamsters/654865405_18110103343827073_5947030164579520834_n.jpg"
+    "image": "hamsters/sherlock-holmes.jpg"
   },
   {
     "id": "hamster-279",
-    "name": "Hamster 279",
+    "name": "Moustachu en larmes",
     "rarity": "rare",
-    "image": "hamsters/654974051_18001052075884731_7443888234915317354_n.jpg"
+    "image": "hamsters/moustachu-en-larmes.jpg"
   },
   {
     "id": "hamster-280",
-    "name": "Hamster 280",
+    "name": "Hamster cocktail",
     "rarity": "rare",
-    "image": "hamsters/655065232_18124331524510789_4169333765672829144_n.jpg"
+    "image": "hamsters/hamster-cocktail.jpg"
   },
   {
     "id": "hamster-281",
-    "name": "Hamster 281",
+    "name": "Hamster tout en hauteur",
     "rarity": "rare",
-    "image": "hamsters/655125164_18084864899211145_4071111322048009589_n.jpg"
+    "image": "hamsters/hamster-tout-en-hauteur.jpg"
   },
   {
     "id": "hamster-282",
-    "name": "Hamster 282",
+    "name": "Hamster anime blond",
     "rarity": "rare",
-    "image": "hamsters/655128014_18094041500321296_6950141783386646957_n.jpg"
+    "image": "hamsters/hamster-anime-blond.jpg"
   },
   {
     "id": "hamster-283",
-    "name": "Hamster 283",
+    "name": "Grand sourire",
     "rarity": "rare",
-    "image": "hamsters/655128744_18108990232642295_8503037055967548700_n.jpg"
+    "image": "hamsters/grand-sourire-3.jpg"
   },
   {
     "id": "hamster-284",
-    "name": "Hamster 284",
+    "name": "Hamster à la casquette",
     "rarity": "rare",
-    "image": "hamsters/655143124_18094733423035153_1535657978763557168_n.jpg"
+    "image": "hamsters/hamster-a-la-casquette.jpg"
   },
   {
     "id": "hamster-285",
-    "name": "Hamster 285",
+    "name": "Hamster endormi",
     "rarity": "rare",
-    "image": "hamsters/655150932_18187891471366367_2558903620479194121_n.jpg"
+    "image": "hamsters/hamster-endormi.jpg"
   },
   {
     "id": "hamster-286",
-    "name": "Hamster 286",
+    "name": "Anti-lactose",
     "rarity": "rare",
-    "image": "hamsters/655163312_18103359673912643_1976942337962601506_n.jpg"
+    "image": "hamsters/anti-lactose.jpg"
   },
   {
     "id": "hamster-287",
-    "name": "Hamster 287",
+    "name": "Anniversaire",
     "rarity": "rare",
-    "image": "hamsters/655165619_18096560033013668_1814246764633784484_n.jpg"
+    "image": "hamsters/anniversaire.jpg"
   },
   {
     "id": "hamster-288",
-    "name": "Hamster 288",
+    "name": "Hamster maquillé",
     "rarity": "rare",
-    "image": "hamsters/655172691_18102414643931435_5772409797930245437_n.jpg"
+    "image": "hamsters/hamster-maquille.jpg"
   },
   {
     "id": "hamster-289",
@@ -1759,9 +1759,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-294",
-    "name": "Hamster 294",
+    "name": "Nerd",
     "rarity": "rare",
-    "image": "hamsters/655243319_18067605167651728_2019700464886275678_n.jpg"
+    "image": "hamsters/nerd.jpg"
   },
   {
     "id": "hamster-295",
@@ -1819,27 +1819,27 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-304",
-    "name": "Hamster 304",
+    "name": "Jigsaw",
     "rarity": "rare",
-    "image": "hamsters/655635963_18099222814778222_1941986641275937076_n.jpg"
+    "image": "hamsters/jigsaw.jpg"
   },
   {
     "id": "hamster-305",
-    "name": "Hamster 305",
+    "name": "Monstre de Frankenstein",
     "rarity": "rare",
-    "image": "hamsters/655682284_18103112566728782_1368430444032401595_n.jpg"
+    "image": "hamsters/monstre-frankenstein.jpg"
   },
   {
     "id": "hamster-306",
-    "name": "Hamster 306",
+    "name": "Fêtard",
     "rarity": "rare",
-    "image": "hamsters/655757152_18211640701322208_8240991071047414098_n.jpg"
+    "image": "hamsters/fetard.jpg"
   },
   {
     "id": "hamster-307",
-    "name": "Hamster 307",
+    "name": "My Chemical Romance",
     "rarity": "rare",
-    "image": "hamsters/655831228_18116539528563835_3796381059649541000_n.jpg"
+    "image": "hamsters/my-chemical-romance.jpg"
   },
   {
     "id": "hamster-308",
@@ -1855,15 +1855,15 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-310",
-    "name": "Hamster 310",
+    "name": "Cousin Machin qui pleure",
     "rarity": "rare",
-    "image": "hamsters/655958434_18087850976222569_5635018214643412583_n.jpg"
+    "image": "hamsters/cousin-machin-qui-pleure.jpg"
   },
   {
     "id": "hamster-311",
-    "name": "Hamster 311",
+    "name": "Père Noël",
     "rarity": "rare",
-    "image": "hamsters/655976412_18080610116609259_2534880439936796104_n.jpg"
+    "image": "hamsters/pere-noel.jpg"
   },
   {
     "id": "hamster-312",
@@ -1897,9 +1897,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-317",
-    "name": "Hamster 317",
+    "name": "Link",
     "rarity": "rare",
-    "image": "hamsters/656076231_18102805159936959_541653766833277443_n.jpg"
+    "image": "hamsters/link.jpg"
   },
   {
     "id": "hamster-318",
@@ -1915,15 +1915,15 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-320",
-    "name": "Hamster 320",
+    "name": "Hamster emo",
     "rarity": "rare",
-    "image": "hamsters/656196463_18108579685838530_8099943869123991454_n.jpg"
+    "image": "hamsters/hamster-emo.jpg"
   },
   {
     "id": "hamster-321",
-    "name": "Hamster 321",
+    "name": "Squelette",
     "rarity": "rare",
-    "image": "hamsters/656196952_18159752884426980_7773021392577490872_n.jpg"
+    "image": "hamsters/squelette.jpg"
   },
   {
     "id": "hamster-322",
@@ -1951,15 +1951,15 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-326",
-    "name": "Hamster 326",
+    "name": "Shrek",
     "rarity": "rare",
-    "image": "hamsters/656654257_17949826445965983_4548313623122646267_n.jpg"
+    "image": "hamsters/shrek.jpg"
   },
   {
     "id": "hamster-327",
-    "name": "Hamster 327",
+    "name": "2-D (Gorillaz)",
     "rarity": "rare",
-    "image": "hamsters/656714213_18121037143609928_2263848079847544925_n.jpg"
+    "image": "hamsters/2-d-gorillaz.jpg"
   },
   {
     "id": "hamster-328",
@@ -1981,9 +1981,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-331",
-    "name": "Hamster 331",
+    "name": "Citrouille",
     "rarity": "rare",
-    "image": "hamsters/657265163_18097140457953227_8819873256850480740_n.jpg"
+    "image": "hamsters/citrouille.jpg"
   },
   {
     "id": "hamster-332",
@@ -1993,15 +1993,15 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-333",
-    "name": "Hamster 333",
+    "name": "Peter Griffin",
     "rarity": "rare",
-    "image": "hamsters/657304138_17964202989057476_7193504039884895960_n.jpg"
+    "image": "hamsters/peter-griffin.jpg"
   },
   {
     "id": "hamster-334",
-    "name": "Hamster 334",
+    "name": "Lutin de Noël",
     "rarity": "rare",
-    "image": "hamsters/657329990_18105868744895381_1584181535380811973_n.jpg"
+    "image": "hamsters/lutin-noel.jpg"
   },
   {
     "id": "hamster-335",
@@ -2011,21 +2011,21 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-336",
-    "name": "Hamster 336",
+    "name": "Bossu",
     "rarity": "rare",
-    "image": "hamsters/657338127_18080116256377906_2792392819988722679_n.jpg"
+    "image": "hamsters/bossu.jpg"
   },
   {
     "id": "hamster-337",
-    "name": "Hamster 337",
+    "name": "Peace and Love",
     "rarity": "rare",
-    "image": "hamsters/657357369_18081447146070727_1665121529009030245_n.jpg"
+    "image": "hamsters/peace-and-love.jpg"
   },
   {
     "id": "hamster-338",
-    "name": "Hamster 338",
+    "name": "Zombie",
     "rarity": "rare",
-    "image": "hamsters/657397026_18341575615246609_4128366202231313730_n.jpg"
+    "image": "hamsters/zombie.jpg"
   },
   {
     "id": "hamster-339",
@@ -2047,9 +2047,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-342",
-    "name": "Hamster 342",
+    "name": "Diable",
     "rarity": "rare",
-    "image": "hamsters/657716173_18445667671118664_6115282758254730548_n.jpg"
+    "image": "hamsters/diable.jpg"
   },
   {
     "id": "hamster-343",
@@ -2071,9 +2071,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-346",
-    "name": "Hamster 346",
+    "name": "Joker",
     "rarity": "rare",
-    "image": "hamsters/658045090_18336830365171783_1748225424886877284_n.jpg"
+    "image": "hamsters/joker-2.jpg"
   },
   {
     "id": "hamster-347",
@@ -2101,9 +2101,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-351",
-    "name": "Hamster 351",
+    "name": "Superman",
     "rarity": "rare",
-    "image": "hamsters/658628092_18320036971261081_7401867004665211305_n.jpg"
+    "image": "hamsters/superman.jpg"
   },
   {
     "id": "hamster-352",
@@ -2131,9 +2131,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-356",
-    "name": "Hamster 356",
+    "name": "Rudolph",
     "rarity": "rare",
-    "image": "hamsters/659209876_18093424127118737_5185081247298030417_n.jpg"
+    "image": "hamsters/rudolph.jpg"
   },
   {
     "id": "hamster-357",
@@ -2149,9 +2149,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-359",
-    "name": "Hamster 359",
+    "name": "Maquillage",
     "rarity": "rare",
-    "image": "hamsters/659653715_18419352469127972_3086044941317747807_n.jpg"
+    "image": "hamsters/maquillage.jpg"
   },
   {
     "id": "hamster-360",
@@ -2179,9 +2179,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-364",
-    "name": "Hamster 364",
+    "name": "Pirate",
     "rarity": "epic",
-    "image": "hamsters/660833433_18283473325305209_5787664843971853282_n.jpg"
+    "image": "hamsters/pirate.jpg"
   },
   {
     "id": "hamster-365",
@@ -2191,9 +2191,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-366",
-    "name": "Hamster 366",
+    "name": "Vampire",
     "rarity": "epic",
-    "image": "hamsters/661225185_18335205496219175_4404565282486244991_n.jpg"
+    "image": "hamsters/vampire.jpg"
   },
   {
     "id": "hamster-367",
@@ -2203,9 +2203,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-368",
-    "name": "Hamster 368",
+    "name": "Lord",
     "rarity": "epic",
-    "image": "hamsters/662002869_18315157258282244_6635353943549290216_n.jpg"
+    "image": "hamsters/lord.jpg"
   },
   {
     "id": "hamster-369",
@@ -2227,9 +2227,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-372",
-    "name": "Hamster 372",
+    "name": "Dracula",
     "rarity": "epic",
-    "image": "hamsters/662498581_18388146811086329_7429735244332294053_n.jpg"
+    "image": "hamsters/dracula-2.jpg"
   },
   {
     "id": "hamster-373",
@@ -2239,15 +2239,15 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-374",
-    "name": "Hamster 374",
+    "name": "Cousin Machin qui pleure 2",
     "rarity": "epic",
-    "image": "hamsters/663019887_18576981664049907_490704247318683160_n.jpg"
+    "image": "hamsters/cousin-machin-qui-pleure-2.jpg"
   },
   {
     "id": "hamster-375",
-    "name": "Hamster 375",
+    "name": "Père Noël",
     "rarity": "epic",
-    "image": "hamsters/663257317_18108463897846568_2806032983315305726_n.jpg"
+    "image": "hamsters/pere-noel-2.jpg"
   },
   {
     "id": "hamster-376",
@@ -2257,21 +2257,21 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-377",
-    "name": "Hamster 377",
+    "name": "Très chaud",
     "rarity": "epic",
-    "image": "hamsters/669412338_18371635357207030_1002252411717691345_n.jpg"
+    "image": "hamsters/tres-chaud.jpg"
   },
   {
     "id": "hamster-378",
-    "name": "Hamster 378",
+    "name": "Naruto",
     "rarity": "epic",
-    "image": "hamsters/669442483_18394432597158585_8846121713409159804_n.jpg"
+    "image": "hamsters/naruto-2.jpg"
   },
   {
     "id": "hamster-379",
-    "name": "Hamster 379",
+    "name": "Jeff (Creepypasta)",
     "rarity": "epic",
-    "image": "hamsters/669746010_18304548004263853_479964669085055362_n.jpg"
+    "image": "hamsters/jeff-creepypasta.jpg"
   },
   {
     "id": "hamster-380",
@@ -2287,9 +2287,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-382",
-    "name": "Hamster 382",
+    "name": "Ghost Face",
     "rarity": "epic",
-    "image": "hamsters/669952927_18390457978084719_9117801307139767691_n.jpg"
+    "image": "hamsters/ghost-face.jpg"
   },
   {
     "id": "hamster-383",
@@ -2305,9 +2305,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-385",
-    "name": "Hamster 385",
+    "name": "Enclume sur la tête",
     "rarity": "epic",
-    "image": "hamsters/670135340_18368476231202489_6715889504371862731_n.jpg"
+    "image": "hamsters/enclume-sur-la-tete.jpg"
   },
   {
     "id": "hamster-386",
@@ -2335,9 +2335,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-390",
-    "name": "Hamster 390",
+    "name": "Pikmin",
     "rarity": "epic",
-    "image": "hamsters/670727590_18078648326190228_5127301220722652541_n.jpg"
+    "image": "hamsters/pikmin.jpg"
   },
   {
     "id": "hamster-391",
@@ -2401,9 +2401,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-401",
-    "name": "Hamster 401",
+    "name": "Choqué",
     "rarity": "epic",
-    "image": "hamsters/720814393_17974674219057476_6152211513626366816_n.jpg"
+    "image": "hamsters/choque.jpg"
   },
   {
     "id": "hamster-402",
@@ -2419,21 +2419,21 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-404",
-    "name": "Hamster 404",
+    "name": "Hamster au pistolet",
     "rarity": "epic",
-    "image": "hamsters/727337635_17975970948057476_1485568012752415999_n.jpg"
+    "image": "hamsters/hamster-au-pistolet.jpg"
   },
   {
     "id": "hamster-405",
-    "name": "Hamster 405",
+    "name": "Caché derrière une brindille",
     "rarity": "epic",
-    "image": "hamsters/728937469_17977023558057476_8489054590723309845_n.jpg"
+    "image": "hamsters/cache-derriere-une-brindille.jpg"
   },
   {
     "id": "hamster-406",
-    "name": "Hamster 406",
+    "name": "Pikachu",
     "rarity": "epic",
-    "image": "hamsters/736191111_17978185425057476_1904209736221455959_n.jpg"
+    "image": "hamsters/pikachu.jpg"
   },
   {
     "id": "hamster-407",
@@ -2455,9 +2455,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-410",
-    "name": "Hamster 410",
+    "name": "Grosses dents",
     "rarity": "legendary",
-    "image": "hamsters/763333627_17983238643057476_1779632560659759710_n.jpg"
+    "image": "hamsters/grosses-dents.jpg"
   },
   {
     "id": "hamster-411",
@@ -2503,9 +2503,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-418",
-    "name": "Hamster 418",
+    "name": "Facteur",
     "rarity": "legendary",
-    "image": "hamsters/829836868_17991799134057476_3130094295495874615_n.jpg"
+    "image": "hamsters/facteur.jpg"
   },
   {
     "id": "hamster-419",
@@ -2517,7 +2517,7 @@ const HAMSTERS = [
     "id": "flamme",
     "name": "Flamme",
     "rarity": "epic",
-    "image": "hamsters/9204390ef9b17b40be77241e0bf0374f.jpg"
+    "image": "hamsters/rage.jpg"
   },
   {
     "id": "hamster-421",
@@ -2527,15 +2527,15 @@ const HAMSTERS = [
   },
   {
     "id": "lollipop",
-    "name": "Lollipop",
+    "name": "Enfantin",
     "rarity": "epic",
-    "image": "hamsters/94d4590d97a6a882cf33f9e1e4fe513d.jpg"
+    "image": "hamsters/enfantin.jpg"
   },
   {
     "id": "mimi",
-    "name": "Mimi",
+    "name": "Minion",
     "rarity": "common",
-    "image": "hamsters/9ac97ec8c7ff8f29ef1a4985b494c0f7.jpg"
+    "image": "hamsters/minion.jpg"
   },
   {
     "id": "hamster-424",
@@ -2563,9 +2563,9 @@ const HAMSTERS = [
   },
   {
     "id": "hamster-428",
-    "name": "Hamster 428",
+    "name": "Lapin",
     "rarity": "mythic",
-    "image": "hamsters/ea3d88a89260173bc6f6a19dc30c923e.jpg"
+    "image": "hamsters/lapin.jpg"
   },
   {
     "id": "hamster-429",
