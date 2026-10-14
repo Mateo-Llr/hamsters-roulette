@@ -6,9 +6,9 @@
     <meta name="theme-color" content="#f7f5ee">
     <meta name="description" content="Clique, fais tourner la roulette et collectionne des hamsters toujours plus rentables.">
     <title>Hamster Roulette — le clicker qui a du poil</title>
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=5">
     <script src="hamster-catalog.js?v=1" defer></script>
-    <script src="game.js?v=7" defer></script>
+    <script src="game.js?v=8" defer></script>
     <script src="collection.js?v=1" defer></script>
   </head>
   <body>
@@ -20,6 +20,11 @@
         <span><b id="income">0</b><small>PAR SECONDE</small></span>
       </div>
     </header>
+    <div class="frenzy-banner" id="frenzy-banner" hidden>
+      <b>Frénésie ! ×3 pièces par seconde · ×5 par clic</b>
+      <span id="frenzy-time">60 s</span>
+      <i><em id="frenzy-bar"></em></i>
+    </div>
 
     <main class="game-world">
       <button class="cube-button" id="click-cube" type="button" aria-label="Cliquer pour gagner des pièces">
@@ -30,6 +35,8 @@
             <span class="cube-face cube-left"></span>
             <span class="cube-face cube-right"></span>
             <span class="cube-face cube-front">🐹</span>
+            <span class="cube-face cube-back"></span>
+            <span class="cube-face cube-bottom"></span>
           </span>
         </span>
       </button>

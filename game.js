@@ -105,7 +105,7 @@ function formatNumber(value) {
 }
 
 function getClickPower() {
-  return 1 + state.clickUpgradeLevel;
+  return (1 + state.clickUpgradeLevel) * (isFrenzy() ? FRENZY.click : 1);
 }
 
 function getHamsterIncome(hamster, level) {
@@ -121,7 +121,7 @@ function getIncomePerSecond() {
     const level = state.hamsters[hamster.id] || 0;
     return total + (level ? getHamsterIncome(hamster, level) : 0);
   }, 0);
-  return base * getCollectionMultiplier();
+  return base * getCollectionMultiplier() * (isFrenzy() ? FRENZY.income : 1);
 }
 
 function getUpgradeCost() {
@@ -496,6 +496,69 @@ elements.modalBackdrop.addEventListener("click", closeRoulette);
 document.addEventListener("keydown", event => {
   if (event.key === "Escape") closeRoulette();
 });
+/* Frénésie : une étoile apparaît de temps en temps, l'attraper active x3 revenus et x5 clics pendant 1 min */
+const FRENZY = { duration: 60000, income: 3, click: 5, orbLife: 14000, minDelay: 60000, maxDelay: 150000 };
+let frenzyUntil = 0;
+let frenzyTicker = 0;
+const frenzyUI = {
+  banner: document.querySelector("#frenzy-banner"),
+  time: document.querySelector("#frenzy-time"),
+  bar: document.querySelector("#frenzy-bar"),
+  world: document.querySelector(".game-world")
+};
+
+function isFrenzy() {
+  return Date.now() < frenzyUntil;
+}
+
+function scheduleFrenzyOrb() {
+  window.setTimeout(spawnFrenzyOrb, FRENZY.minDelay + Math.random() * (FRENZY.maxDelay - FRENZY.minDelay));
+}
+
+function spawnFrenzyOrb() {
+  if (isFrenzy() || document.hidden) return scheduleFrenzyOrb();
+  const orb = document.createElement("button");
+  orb.type = "button";
+  orb.className = "frenzy-orb";
+  orb.setAttribute("aria-label", "Attraper la frénésie");
+  orb.innerHTML = '<span aria-hidden="true">⭐</span><b>Frénésie !</b>';
+  orb.style.left = `${15 + Math.random() * 70}%`;
+  orb.style.top = `${24 + Math.random() * 46}%`;
+  const expire = window.setTimeout(() => { orb.remove(); scheduleFrenzyOrb(); }, FRENZY.orbLife);
+  orb.addEventListener("click", () => {
+    window.clearTimeout(expire);
+    orb.remove();
+    startFrenzy();
+  }, { once: true });
+  frenzyUI.world.append(orb);
+}
+
+function startFrenzy() {
+  frenzyUntil = Date.now() + FRENZY.duration;
+  document.body.classList.add("frenzy");
+  frenzyUI.banner.hidden = false;
+  window.clearInterval(frenzyTicker);
+  frenzyTicker = window.setInterval(tickFrenzy, 250);
+  tickFrenzy();
+  updateDisplay();
+  showToast("Frénésie ! Revenus ×3 et clics ×5 pendant 1 minute.");
+}
+
+function tickFrenzy() {
+  const remaining = frenzyUntil - Date.now();
+  if (remaining <= 0) {
+    window.clearInterval(frenzyTicker);
+    document.body.classList.remove("frenzy");
+    frenzyUI.banner.hidden = true;
+    updateDisplay();
+    scheduleFrenzyOrb();
+    return;
+  }
+  frenzyUI.time.textContent = `${Math.ceil(remaining / 1000)} s`;
+  frenzyUI.bar.style.width = `${remaining / FRENZY.duration * 100}%`;
+}
+
+scheduleFrenzyOrb();
 window.addEventListener("beforeunload", saveState);
 
 renderHamsters();
