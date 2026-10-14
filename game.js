@@ -109,7 +109,7 @@ function getClickPower() {
 }
 
 function getHamsterIncome(hamster, level) {
-  return RARITIES[hamster.rarity].baseIncome * (1 + (level - 1) * 0.5);
+  return RARITIES[hamster.rarity].baseIncome * (1 + (level - 1) * 0.7);
 }
 
 function getCollectionMultiplier() {
