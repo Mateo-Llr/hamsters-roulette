@@ -2,12 +2,14 @@
 
 const SAVE_KEY = "hamster-club-save-v1";
 const RARITIES = {
-  common: { label: "Commun", chance: 58, baseIncome: 0.6 },
-  rare: { label: "Rare", chance: 26, baseIncome: 2 },
-  epic: { label: "Épique", chance: 11, baseIncome: 7 },
-  legendary: { label: "Légendaire", chance: 4, baseIncome: 22 },
-  mythic: { label: "Mythique", chance: 1, baseIncome: 80 }
+  common: { label: "Commun", chance: 58, baseIncome: 0.6, upgradeBase: 40 },
+  rare: { label: "Rare", chance: 26, baseIncome: 2, upgradeBase: 160 },
+  epic: { label: "Épique", chance: 11, baseIncome: 7, upgradeBase: 650 },
+  legendary: { label: "Légendaire", chance: 4, baseIncome: 22, upgradeBase: 2800 },
+  mythic: { label: "Mythique", chance: 1, baseIncome: 80, upgradeBase: 12000 }
 };
+const MAX_LEVEL = 30;
+const COLLECTION_BONUS = 0.005;
 
 const elements = {
   coins: document.querySelector("#coins"),
@@ -39,7 +41,7 @@ function normalizeState(value) {
   if (value.hamsters && typeof value.hamsters === "object" && !Array.isArray(value.hamsters)) {
     for (const hamster of HAMSTERS) {
       const level = Number(value.hamsters[hamster.id]);
-      if (Number.isSafeInteger(level) && level > 0) hamsters[hamster.id] = Math.min(level, 1_000_000);
+      if (Number.isSafeInteger(level) && level > 0) hamsters[hamster.id] = Math.min(level, MAX_LEVEL);
     }
   }
   return {
@@ -110,11 +112,16 @@ function getHamsterIncome(hamster, level) {
   return RARITIES[hamster.rarity].baseIncome * (1 + (level - 1) * 0.5);
 }
 
+function getCollectionMultiplier() {
+  return 1 + Object.keys(state.hamsters).length * COLLECTION_BONUS;
+}
+
 function getIncomePerSecond() {
-  return HAMSTERS.reduce((total, hamster) => {
+  const base = HAMSTERS.reduce((total, hamster) => {
     const level = state.hamsters[hamster.id] || 0;
     return total + (level ? getHamsterIncome(hamster, level) : 0);
   }, 0);
+  return base * getCollectionMultiplier();
 }
 
 function getUpgradeCost() {
@@ -136,6 +143,7 @@ function updateDisplay() {
   elements.upgrade.disabled = state.coins < getUpgradeCost();
   elements.spinCost.textContent = formatNumber(getSpinCost());
   elements.rouletteToggle.disabled = state.coins < getSpinCost() || elements.rouletteToggle.dataset.spinning === "true";
+  if (typeof refreshCollectionUI === "function") refreshCollectionUI();
 }
 
 function renderHamsters() {
@@ -367,14 +375,27 @@ elements.hamsterSwarm.addEventListener("click", event => {
     window.clearTimeout(suppressHamsterClickTimeout);
     return;
   }
-  handleClick();
+  handleClick(event);
 });
 window.addEventListener("resize", () => {
   renderHamsters();
   startHamsterAnimation();
 });
 
-function handleClick() {
+function showClickPop(event, amount) {
+  const rect = elements.cube.getBoundingClientRect();
+  const hasPoint = event && event.clientX;
+  const pop = document.createElement("span");
+  pop.className = "click-pop";
+  pop.textContent = `+${formatNumber(amount)}`;
+  pop.style.left = `${hasPoint ? event.clientX : rect.left + rect.width / 2}px`;
+  pop.style.top = `${hasPoint ? event.clientY : rect.top + rect.height / 2}px`;
+  document.body.append(pop);
+  window.setTimeout(() => pop.remove(), 800);
+}
+
+function handleClick(event) {
+  showClickPop(event, getClickPower());
   state.coins += getClickPower();
   state.totalClicks += 1;
   updateDisplay();
@@ -446,19 +467,24 @@ function spinRoulette() {
 
   window.setTimeout(() => {
     const previousLevel = state.hamsters[hamster.id] || 0;
+    const maxed = previousLevel >= MAX_LEVEL;
+    const refund = Math.floor(cost * 0.5);
     state.coins -= cost;
+    if (maxed) state.coins += refund;
     state.roulettePurchases += 1;
-    state.hamsters[hamster.id] = previousLevel + 1;
+    state.hamsters[hamster.id] = Math.min(previousLevel + 1, MAX_LEVEL);
     elements.rouletteToggle.dataset.spinning = "false";
     elements.reelTrack.style.transform = to;
     elements.wheelResult.className = `wheel-result result-${hamster.rarity}`;
-    elements.wheelResult.textContent = previousLevel
+    elements.wheelResult.textContent = maxed
+      ? `${hamster.name} est déjà au max : ${formatNumber(refund)} ◈ remboursées.`
+      : previousLevel
       ? `${hamster.name} passe au niveau ${previousLevel + 1} !`
       : `${hamster.name} rejoint ta tribu !`;
     renderHamsters();
     updateDisplay();
     saveState();
-    showToast(previousLevel ? `Doublon ! ${hamster.name} passe niveau ${previousLevel + 1}.` : `${hamster.name} rejoint ta tribu !`);
+    showToast(maxed ? `${hamster.name} est au max : ${formatNumber(refund)} ◈ remboursées.` : previousLevel ? `Doublon ! ${hamster.name} passe niveau ${previousLevel + 1}.` : `${hamster.name} rejoint ta tribu !`);
   }, duration + 100);
 }
 

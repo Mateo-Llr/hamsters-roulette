@@ -6,9 +6,10 @@
     <meta name="theme-color" content="#f7f5ee">
     <meta name="description" content="Clique, fais tourner la roulette et collectionne des hamsters toujours plus rentables.">
     <title>Hamster Roulette — le clicker qui a du poil</title>
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
     <script src="hamster-catalog.js?v=1" defer></script>
-    <script src="game.js?v=6" defer></script>
+    <script src="game.js?v=7" defer></script>
+    <script src="collection.js?v=1" defer></script>
   </head>
   <body>
     <header class="game-hud" aria-label="Statistiques">
@@ -40,6 +41,9 @@
       <button class="roulette-orb" id="roulette-toggle" type="button" aria-label="Ouvrir la roulette">
         <span aria-hidden="true">🎰</span><b id="spin-cost">25</b>
       </button>
+      <button class="collection-orb" id="catalog-toggle" type="button" aria-label="Ouvrir la collection">
+        <span aria-hidden="true">📖</span><b id="catalog-progress">0/430</b>
+      </button>
     </main>
 
     <div class="roulette-modal" id="roulette-modal" role="dialog" aria-modal="true" aria-labelledby="roulette-heading" aria-hidden="true">
@@ -60,6 +64,29 @@
           <span class="legend-legendary">Légendaire 4 %</span>
           <span class="legend-mythic">Mythique 1 %</span>
         </div>
+      </section>
+    </div>
+    <div class="roulette-modal catalog-modal" id="catalog-modal" role="dialog" aria-modal="true" aria-labelledby="catalog-heading" aria-hidden="true">
+      <button class="modal-backdrop" id="catalog-backdrop" type="button" aria-label="Fermer la collection"></button>
+      <section class="catalog-panel">
+        <button class="modal-close" id="catalog-close" type="button" aria-label="Fermer">×</button>
+        <header class="dex-head">
+          <h2 id="catalog-heading">Collection</h2>
+          <div class="dex-meter"><i id="dex-bar"></i></div>
+          <div class="dex-sub"><span id="dex-count"></span><span id="dex-bonus"></span></div>
+        </header>
+        <div class="dex-tools">
+          <div class="dex-chips" id="dex-chips"></div>
+          <input class="dex-field" id="dex-search" type="search" placeholder="Chercher parmi tes hamsters" aria-label="Chercher un hamster">
+          <select class="dex-field" id="dex-owned" aria-label="Filtrer par statut">
+            <option value="all">Tous</option><option value="owned">Possédés</option><option value="missing">Manquants</option>
+          </select>
+        </div>
+        <div class="dex-scroll">
+          <div class="dex-grid" id="dex-grid"></div>
+          <button class="dex-more" id="dex-more" type="button" hidden></button>
+        </div>
+        <div class="dex-detail" id="dex-detail" hidden></div>
       </section>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
