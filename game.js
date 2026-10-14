@@ -10,6 +10,7 @@ const RARITIES = {
 };
 const MAX_LEVEL = 30;
 const COLLECTION_BONUS = 0.005;
+const MILESTONE_BONUS = 1.5; // ×1,5 de revenus tous les 5 niveaux d'un hamster
 
 const elements = {
   coins: document.querySelector("#coins"),
@@ -109,7 +110,7 @@ function getClickPower() {
 }
 
 function getHamsterIncome(hamster, level) {
-  return RARITIES[hamster.rarity].baseIncome * (1 + (level - 1) * 0.7);
+  return RARITIES[hamster.rarity].baseIncome * (1 + (level - 1) * 0.7) * MILESTONE_BONUS ** Math.floor(level / 5);
 }
 
 function getCollectionMultiplier() {
@@ -129,7 +130,7 @@ function getUpgradeCost() {
 }
 
 function getSpinCost() {
-  return Math.floor(25 * 0.7 * (1.2 ** state.roulettePurchases));
+  return Math.floor(30 * (state.roulettePurchases + 1) ** 2.2);
 }
 
 function updateDisplay() {

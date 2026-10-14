@@ -16,7 +16,7 @@ const fold = text => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLow
 const ownedCount = () => Object.keys(state.hamsters).length;
 
 function getLevelUpCost(hamster, level) {
-  return Math.floor(RARITIES[hamster.rarity].upgradeBase * 1.35 ** (level - 1));
+  return Math.floor(RARITIES[hamster.rarity].upgradeBase * 1.3 ** (level - 1));
 }
 
 function levelUpHamster(id) {
@@ -92,7 +92,7 @@ function renderDetail() {
       ${level < MAX_LEVEL
         ? `<button class="dex-upgrade" type="button" data-act="up" data-cost="${cost}" ${state.coins < cost ? "disabled" : ""}>Améliorer · ◈ ${formatNumber(cost)}</button>`
         : `<p class="dex-hint">Niveau maximum. Les doublons de ce hamster rembourseront la moitié du prix du tirage.</p>`}
-      <p class="dex-hint">Un doublon tiré à la roulette ajoute aussi un niveau.</p>`;
+      <p class="dex-hint">${level < MAX_LEVEL ? `Palier : revenus ×${String(MILESTONE_BONUS).replace(".", ",")} au niveau ${(Math.floor(level / 5) + 1) * 5}. ` : ""}Un doublon tiré à la roulette ajoute aussi un niveau.</p>`;
   }
   dex.detail.innerHTML = `<div class="dex-sheet r-${hamster.rarity}">
     <div class="dex-portrait">${level ? `<img src="${hamster.image}" alt="${hamster.name}">` : `<span class="dex-q">?</span>`}</div>
