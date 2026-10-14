@@ -10,6 +10,7 @@ const RARITIES = {
 };
 const MAX_LEVEL = 30;
 const COLLECTION_BONUS = 0.005;
+const CLICK_MILESTONE_BONUS = 1.5; // ×1,5 de valeur de clic tous les 5 niveaux de doigt
 const MILESTONE_BONUS = 1.5; // ×1,5 de revenus tous les 5 niveaux d'un hamster
 
 const elements = {
@@ -105,8 +106,12 @@ function formatNumber(value) {
   return new Intl.NumberFormat("fr-FR", { notation: "compact", maximumFractionDigits: 1 }).format(value);
 }
 
+function getClickMilestone() {
+  return CLICK_MILESTONE_BONUS ** Math.floor(state.clickUpgradeLevel / 5);
+}
+
 function getClickPower() {
-  return (1 + state.clickUpgradeLevel) * (isFrenzy() ? FRENZY.click : 1);
+  return (1 + state.clickUpgradeLevel) * getClickMilestone() * (isFrenzy() ? FRENZY.click : 1);
 }
 
 function getHamsterIncome(hamster, level) {
@@ -139,7 +144,7 @@ function updateDisplay() {
   elements.coins.textContent = formatNumber(state.coins);
   elements.income.textContent = formatNumber(income);
   elements.clickValue.textContent = formatNumber(clickPower);
-  elements.upgradeLevel.textContent = `Niv. ${formatNumber(state.clickUpgradeLevel)}`;
+  elements.upgradeLevel.textContent = `Niv. ${formatNumber(state.clickUpgradeLevel)} · ×${getClickMilestone().toFixed(1).replace(".", ",")}`;
   elements.upgradeCost.textContent = formatNumber(getUpgradeCost());
   elements.upgrade.disabled = state.coins < getUpgradeCost();
   elements.spinCost.textContent = formatNumber(getSpinCost());
