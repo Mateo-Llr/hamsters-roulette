@@ -125,11 +125,11 @@ function getIncomePerSecond() {
 }
 
 function getUpgradeCost() {
-  return Math.floor(15 * (1.1 ** state.clickUpgradeLevel));
+  return Math.floor(15 * (1.15 ** state.clickUpgradeLevel));
 }
 
 function getSpinCost() {
-  return Math.floor(25 * 0.7 * (1.15 ** state.roulettePurchases));
+  return Math.floor(25 * 0.7 * (1.2 ** state.roulettePurchases));
 }
 
 function updateDisplay() {
