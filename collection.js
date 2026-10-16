@@ -9,7 +9,7 @@ const dex = {
   toggle: $("#catalog-toggle"), progress: $("#catalog-progress"), modal: $("#catalog-modal"),
   close: $("#catalog-close"), backdrop: $("#catalog-backdrop"), count: $("#dex-count"), bar: $("#dex-bar"),
   bonus: $("#dex-bonus"), chips: $("#dex-chips"), search: $("#dex-search"), owned: $("#dex-owned"),
-  grid: $("#dex-grid"), more: $("#dex-more"), detail: $("#dex-detail")
+  maxAll: $("#dex-maxall"), grid: $("#dex-grid"), more: $("#dex-more"), detail: $("#dex-detail")
 };
 const dexView = { rarity: "all", owned: "all", query: "", shown: DEX_PAGE, selected: null };
 const fold = text => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -55,6 +55,8 @@ function renderCatalog() {
   ])];
   dex.chips.innerHTML = chips.map(([r, label, o, t]) =>
     `<button class="dex-chip${r === "all" ? "" : ` r-${r}`}" type="button" data-rarity="${r}" aria-pressed="${dexView.rarity === r}">${label} ${o}/${t}</button>`).join("");
+
+  dex.maxAll.textContent = dexView.rarity === "all" ? "⏫ Maxxer tout" : `⏫ Maxxer ${RARITIES[dexView.rarity].label.toLowerCase()}s`;
 
   const list = visibleHamsters();
   dex.grid.innerHTML = list.slice(0, dexView.shown).map(({ h, lv }) => lv

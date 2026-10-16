@@ -178,7 +178,7 @@ function updateDisplay() {
   if (typeof refreshCollectionUI === "function") refreshCollectionUI();
 }
 
-const RARITY_ORDER = { mythic: 0, legendary: 1, epic: 2, rare: 3, common: 4 };
+const SWARM_RARITY_RANK = { mythic: 0, legendary: 1, epic: 2, rare: 3, common: 4 };
 
 /* Rangement : les hamsters sont triés (raretés les plus hautes, puis niveaux les plus hauts) et rangés en colonnes
    serrées de chaque côté du cube, en partant des bords. La taille s'adapte pour que tout tienne sans
@@ -212,7 +212,7 @@ function computeSwarmLayout(count, width, height) {
 
 function renderHamsters() {
   const owned = HAMSTERS.filter(hamster => state.hamsters[hamster.id]).sort((a, b) =>
-    RARITY_ORDER[a.rarity] - RARITY_ORDER[b.rarity]
+    SWARM_RARITY_RANK[a.rarity] - SWARM_RARITY_RANK[b.rarity]
     || state.hamsters[b.id] - state.hamsters[a.id]
     || a.name.localeCompare(b.name, "fr")
   );
@@ -479,21 +479,14 @@ function buyMaxUpgrade() {
   showToast(`Doigt turbo niveau ${formatNumber(state.clickUpgradeLevel)} (+${formatNumber(plan.count)}) !`);
 }
 
-/* Maxxer tout : monte les hamsters possédés, le moins cher en premier, tant que les pièces suffisent.
-   Si collection.js expose déjà un calcul de coût (getHamsterUpgradeCost), on l'utilise pour rester cohérent
-   avec le bouton d'amélioration de la fiche ; sinon on retombe sur la formule ci-dessous. */
-function getHamsterLevelCost(hamster, level) {
-  if (typeof window.getHamsterUpgradeCost === "function") {
-    const cost = Number(window.getHamsterUpgradeCost(hamster, level));
-    if (Number.isFinite(cost) && cost >= 0) return cost;
-  }
-  return Math.floor(RARITIES[hamster.rarity].upgradeBase * 1.35 ** (level - 1));
-}
-
+/* Maxxer tout : monte les hamsters possédés (ceux de la rareté sélectionnée dans la collection, sinon tous),
+   le moins cher en premier, tant que les pièces suffisent. Même coût que le bouton « Améliorer » (getLevelUpCost). */
 function maxAllHamsters() {
-  const owned = HAMSTERS.filter(hamster => state.hamsters[hamster.id] && state.hamsters[hamster.id] < MAX_LEVEL);
-  if (!owned.length) {
-    showToast(HAMSTERS.some(hamster => state.hamsters[hamster.id]) ? "Tous tes hamsters sont déjà au max !" : "Tu n'as encore aucun hamster.");
+  const rarity = typeof dexView !== "undefined" ? dexView.rarity : "all";
+  const pool = HAMSTERS.filter(hamster => state.hamsters[hamster.id] && (rarity === "all" || hamster.rarity === rarity));
+  const upgradable = pool.filter(hamster => state.hamsters[hamster.id] < MAX_LEVEL);
+  if (!upgradable.length) {
+    showToast(pool.length ? "Ces hamsters sont déjà au max !" : "Tu n'as aucun hamster dans cette catégorie.");
     return;
   }
   let spent = 0;
@@ -502,10 +495,10 @@ function maxAllHamsters() {
   for (;;) {
     let cheapest = null;
     let cheapestCost = Infinity;
-    for (const hamster of owned) {
+    for (const hamster of upgradable) {
       const level = state.hamsters[hamster.id];
       if (level >= MAX_LEVEL) continue;
-      const cost = getHamsterLevelCost(hamster, level);
+      const cost = getLevelUpCost(hamster, level);
       if (cost < cheapestCost) { cheapest = hamster; cheapestCost = cost; }
     }
     if (!cheapest || cheapestCost > state.coins) break;
@@ -522,6 +515,7 @@ function maxAllHamsters() {
   renderHamsters();
   updateDisplay();
   saveState();
+  if (typeof renderCatalog === "function") renderCatalog();
   showToast(`${formatNumber(upgrades)} amélioration${upgrades > 1 ? "s" : ""} sur ${touched.size} hamster${touched.size > 1 ? "s" : ""} pour ${formatNumber(spent)} ◈.`);
 }
 
