@@ -6,9 +6,9 @@
     <meta name="theme-color" content="#0e110e">
     <meta name="description" content="Clique, fais tourner la roulette et collectionne des hamsters toujours plus rentables.">
     <title>Hamster Roulette — le clicker qui a du poil</title>
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="styles.css?v=7">
     <script src="hamster-catalog.js?v=1" defer></script>
-    <script src="game.js?v=8" defer></script>
+    <script src="game.js?v=9" defer></script>
     <script src="collection.js?v=1" defer></script>
   </head>
   <body>
@@ -41,10 +41,16 @@
         </span>
       </button>
       <div class="hamster-swarm" id="hamster-swarm" aria-label="Hamsters de ta collection"></div>
-      <button class="upgrade-orb" id="click-upgrade" type="button" aria-label="Améliorer la valeur du clic">
-        <span aria-hidden="true">👆</span><b id="upgrade-cost">20</b>
-        <span class="upgrade-level" id="upgrade-level">Niv. 0</span>
-      </button>
+      <div class="upgrade-group">
+        <button class="upgrade-orb" id="click-upgrade" type="button" aria-label="Améliorer la valeur du clic">
+          <span aria-hidden="true">👆</span><b id="upgrade-cost">20</b>
+          <span class="upgrade-level" id="upgrade-level">Niv. 0</span>
+        </button>
+        <button class="upgrade-orb upgrade-max" id="click-upgrade-max" type="button" aria-label="Mettre la valeur du clic au niveau maximum possible">
+          <span aria-hidden="true">⏫</span><b id="upgrade-max-cost">MAX</b>
+          <span class="upgrade-level" id="upgrade-max-count">+0 niv.</span>
+        </button>
+      </div>
       <button class="roulette-orb" id="roulette-toggle" type="button" aria-label="Ouvrir la roulette">
         <span aria-hidden="true">🎰</span><b id="spin-cost">25</b>
       </button>
@@ -83,7 +89,10 @@
           <div class="dex-sub"><span id="dex-count"></span><span id="dex-bonus"></span></div>
         </header>
         <div class="dex-tools">
-          <div class="dex-chips" id="dex-chips"></div>
+          <div class="dex-chiprow">
+            <div class="dex-chips" id="dex-chips"></div>
+            <button class="dex-maxall" id="dex-maxall" type="button" aria-label="Améliorer tous les hamsters au maximum possible">⏫ Maxxer tout</button>
+          </div>
           <input class="dex-field" id="dex-search" type="search" placeholder="Chercher parmi tes hamsters" aria-label="Chercher un hamster">
           <select class="dex-field" id="dex-owned" aria-label="Filtrer par statut">
             <option value="all">Tous</option><option value="owned">Possédés</option><option value="missing">Manquants</option>

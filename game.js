@@ -10,7 +10,8 @@ const RARITIES = {
 };
 const MAX_LEVEL = 30;
 const COLLECTION_BONUS = 0.005;
-const CLICK_MILESTONE_BONUS = 1.5; // ×1,5 de valeur de clic tous les 5 niveaux de doigt
+const CLICK_MILESTONE_BONUS = 1.25; // ×1,25 de valeur de clic tous les 5 niveaux de doigt
+const CLICK_LEVEL_GAIN = 0.5; // +0,5 de base par niveau de doigt
 const MILESTONE_BONUS = 1.5; // ×1,5 de revenus tous les 5 niveaux d'un hamster
 
 const elements = {
@@ -21,6 +22,10 @@ const elements = {
   upgrade: document.querySelector("#click-upgrade"),
   upgradeLevel: document.querySelector("#upgrade-level"),
   upgradeCost: document.querySelector("#upgrade-cost"),
+  upgradeMax: document.querySelector("#click-upgrade-max"),
+  upgradeMaxCost: document.querySelector("#upgrade-max-cost"),
+  upgradeMaxCount: document.querySelector("#upgrade-max-count"),
+  maxAll: document.querySelector("#dex-maxall"),
   rouletteToggle: document.querySelector("#roulette-toggle"),
   spinCost: document.querySelector("#spin-cost"),
   rouletteModal: document.querySelector("#roulette-modal"),
@@ -111,7 +116,7 @@ function getClickMilestone() {
 }
 
 function getClickPower() {
-  return (1 + state.clickUpgradeLevel) * getClickMilestone() * (isFrenzy() ? FRENZY.click : 1);
+  return (1 + state.clickUpgradeLevel * CLICK_LEVEL_GAIN) * getClickMilestone() * (isFrenzy() ? FRENZY.click : 1);
 }
 
 function getHamsterIncome(hamster, level) {
@@ -130,8 +135,25 @@ function getIncomePerSecond() {
   return base * getCollectionMultiplier() * (isFrenzy() ? FRENZY.income : 1);
 }
 
-function getUpgradeCost() {
-  return Math.floor(15 * (1.15 ** state.clickUpgradeLevel));
+function getUpgradeCost(level = state.clickUpgradeLevel) {
+  return Math.floor(15 * (1.15 ** level));
+}
+
+// Combien de niveaux de doigt peut-on acheter d'un coup, et pour quel prix total ?
+function getMaxUpgradePlan() {
+  let level = state.clickUpgradeLevel;
+  let coins = state.coins;
+  let total = 0;
+  let count = 0;
+  while (level < 1_000_000) {
+    const cost = getUpgradeCost(level);
+    if (coins < cost) break;
+    coins -= cost;
+    total += cost;
+    level += 1;
+    count += 1;
+  }
+  return { count, total };
 }
 
 function getSpinCost() {
@@ -144,19 +166,56 @@ function updateDisplay() {
   elements.coins.textContent = formatNumber(state.coins);
   elements.income.textContent = formatNumber(income);
   elements.clickValue.textContent = formatNumber(clickPower);
-  elements.upgradeLevel.textContent = `Niv. ${formatNumber(state.clickUpgradeLevel)} · ×${getClickMilestone().toFixed(1).replace(".", ",")}`;
+  elements.upgradeLevel.textContent = `Niv. ${formatNumber(state.clickUpgradeLevel)} · ×${getClickMilestone().toFixed(2).replace(".", ",")}`;
   elements.upgradeCost.textContent = formatNumber(getUpgradeCost());
   elements.upgrade.disabled = state.coins < getUpgradeCost();
+  const maxPlan = getMaxUpgradePlan();
+  elements.upgradeMax.disabled = maxPlan.count < 1;
+  elements.upgradeMaxCost.textContent = maxPlan.count ? formatNumber(maxPlan.total) : "MAX";
+  elements.upgradeMaxCount.textContent = `+${formatNumber(maxPlan.count)} niv.`;
   elements.spinCost.textContent = formatNumber(getSpinCost());
   elements.rouletteToggle.disabled = state.coins < getSpinCost() || elements.rouletteToggle.dataset.spinning === "true";
   if (typeof refreshCollectionUI === "function") refreshCollectionUI();
 }
 
+const RARITY_ORDER = { mythic: 0, legendary: 1, epic: 2, rare: 3, common: 4 };
+
+/* Rangement : les hamsters sont triés (raretés les plus hautes, puis niveaux les plus hauts) et rangés en colonnes
+   serrées de chaque côté du cube, en partant des bords. La taille s'adapte pour que tout tienne sans
+   jamais passer sur le cube central. */
+function computeSwarmLayout(count, width, height) {
+  const margin = 6;
+  const gap = 6;
+  const usableHeight = Math.max(60, height - getBottomSafeArea() - margin * 2);
+  const perSide = Math.ceil(count / 2);
+  const maxWidth = Math.max(22, Math.min(82, window.innerWidth * 0.07));
+  const attempts = [
+    { centerGap: Math.min(width * 0.36, 380), minWidth: 22 },
+    { centerGap: Math.min(width * 0.22, 240), minWidth: 14 }
+  ];
+  let layout = null;
+  for (const { centerGap, minWidth } of attempts) {
+    const sideWidth = Math.max(40, (width - centerGap) / 2 - margin);
+    let spriteWidth = maxWidth;
+    while (true) {
+      const spriteHeight = spriteWidth * 1.24;
+      const cols = Math.max(1, Math.floor((sideWidth + gap) / (spriteWidth + gap)));
+      const rows = Math.max(1, Math.floor((usableHeight + gap) / (spriteHeight + gap)));
+      layout = { margin, gap, spriteWidth, spriteHeight, cols, rows, usableHeight, fits: cols * rows >= perSide };
+      if (layout.fits || spriteWidth <= minWidth) break;
+      spriteWidth = Math.max(minWidth, spriteWidth * 0.94);
+    }
+    if (layout.fits) break;
+  }
+  return layout;
+}
+
 function renderHamsters() {
-  const owned = HAMSTERS.filter(hamster => state.hamsters[hamster.id]);
-  const sizeScale = Math.max(0.3, Math.sqrt(24 / Math.max(owned.length, 24)));
-  const spriteWidth = Math.max(22, Math.min(82, window.innerWidth * 0.07) * sizeScale);
-  const spriteHeight = Math.max(28, Math.min(102, window.innerWidth * 0.09) * sizeScale);
+  const owned = HAMSTERS.filter(hamster => state.hamsters[hamster.id]).sort((a, b) =>
+    RARITY_ORDER[a.rarity] - RARITY_ORDER[b.rarity]
+    || state.hamsters[b.id] - state.hamsters[a.id]
+    || a.name.localeCompare(b.name, "fr")
+  );
   const ownedIds = new Set(owned.map(hamster => hamster.id));
   for (const id of hamsterSprites.keys()) {
     if (!ownedIds.has(id)) {
@@ -164,6 +223,10 @@ function renderHamsters() {
       hamsterSprites.delete(id);
     }
   }
+
+  const bounds = elements.hamsterSwarm.getBoundingClientRect();
+  const layout = computeSwarmLayout(owned.length, bounds.width, bounds.height);
+  const { margin, gap, spriteWidth, spriteHeight, cols, rows, usableHeight } = layout;
 
   elements.hamsterSwarm.innerHTML = owned.map((hamster, index) => {
     const level = state.hamsters[hamster.id];
@@ -176,54 +239,42 @@ function renderHamsters() {
     </figure>`;
   }).join("");
 
-  const bounds = elements.hamsterSwarm.getBoundingClientRect();
+  const perSide = Math.ceil(owned.length / 2);
+  const rowsUsed = Math.max(1, Math.min(rows, perSide));
+  const rowStep = rowsUsed > 1 ? Math.min(spriteHeight + 22, (usableHeight - spriteHeight) / (rowsUsed - 1)) : 0;
+  const blockHeight = spriteHeight + rowStep * (rowsUsed - 1);
+  const topOffset = margin + Math.max(0, (usableHeight - blockHeight) / 2);
   const resized = bounds.width !== swarmSize.width || bounds.height !== swarmSize.height;
-  const margin = 6;
-  const usableHeight = bounds.height - getBottomSafeArea();
-  const rowCount = Math.max(1, Math.floor((usableHeight - spriteHeight - margin * 2) / (spriteHeight + 3)) + 1);
-  const rowSpacing = rowCount > 1 ? (usableHeight - spriteHeight - margin * 2) / (rowCount - 1) : 0;
+
   for (const [index, hamster] of owned.entries()) {
     const element = elements.hamsterSwarm.querySelector(`[data-hamster-id="${hamster.id}"]`);
-    const dimensions = element.getBoundingClientRect();
+    const leftSide = index % 2 === 0;
+    const slot = Math.floor(index / 2);
+    // Les cases se remplissent colonne par colonne en partant du bord de l'écran vers le centre.
+    const column = Math.floor(slot / rows);
+    const row = slot % rows;
+    const offset = margin + column * (spriteWidth + gap);
+    const homeX = leftSide ? offset : bounds.width - offset - spriteWidth;
+    const homeY = topOffset + row * rowStep;
     let sprite = hamsterSprites.get(hamster.id);
     if (!sprite) {
-      const sideIndex = Math.floor(index / 2);
-      const column = Math.floor(sideIndex / rowCount);
-      const row = sideIndex % rowCount;
-      const leftSide = index % 2 === 0;
-      const horizontalOffset = margin + column * (spriteWidth + 10);
-      const homeX = leftSide
-        ? horizontalOffset
-        : bounds.width - horizontalOffset - dimensions.width;
-      const homeY = margin + row * rowSpacing;
-      sprite = {
-        element,
-        x: homeX,
-        y: homeY,
-        homeX,
-        homeY,
-        width: dimensions.width,
-        height: dimensions.height,
-        vx: 0,
-        vy: 0
-      };
+      sprite = { element, x: homeX, y: homeY, homeX, homeY, width: spriteWidth, height: spriteHeight, vx: 0, vy: 0 };
       hamsterSprites.set(hamster.id, sprite);
     } else {
       sprite.element = element;
       if (resized && swarmSize.width && swarmSize.height) {
         sprite.x *= bounds.width / swarmSize.width;
         sprite.y *= bounds.height / swarmSize.height;
-        sprite.homeX *= bounds.width / swarmSize.width;
-        sprite.homeY *= bounds.height / swarmSize.height;
       }
-      sprite.width = dimensions.width;
-      sprite.height = dimensions.height;
+      sprite.homeX = homeX;
+      sprite.homeY = homeY;
+      sprite.width = spriteWidth;
+      sprite.height = spriteHeight;
     }
-    sprite.homeX = Math.max(margin, Math.min(bounds.width - sprite.width - margin, sprite.homeX));
-    sprite.homeY = Math.max(margin, Math.min(bounds.height - sprite.height - getBottomSafeArea(), sprite.homeY));
     setHamsterPosition(sprite, bounds.width, bounds.height);
   }
   swarmSize = { width: bounds.width, height: bounds.height };
+  startHamsterAnimation();
 }
 
 function getBottomSafeArea() {
@@ -418,6 +469,62 @@ function buyUpgrade() {
   showToast(`Doigt turbo niveau ${state.clickUpgradeLevel} !`);
 }
 
+function buyMaxUpgrade() {
+  const plan = getMaxUpgradePlan();
+  if (plan.count < 1) return;
+  state.coins -= plan.total;
+  state.clickUpgradeLevel += plan.count;
+  updateDisplay();
+  saveState();
+  showToast(`Doigt turbo niveau ${formatNumber(state.clickUpgradeLevel)} (+${formatNumber(plan.count)}) !`);
+}
+
+/* Maxxer tout : monte les hamsters possédés, le moins cher en premier, tant que les pièces suffisent.
+   Si collection.js expose déjà un calcul de coût (getHamsterUpgradeCost), on l'utilise pour rester cohérent
+   avec le bouton d'amélioration de la fiche ; sinon on retombe sur la formule ci-dessous. */
+function getHamsterLevelCost(hamster, level) {
+  if (typeof window.getHamsterUpgradeCost === "function") {
+    const cost = Number(window.getHamsterUpgradeCost(hamster, level));
+    if (Number.isFinite(cost) && cost >= 0) return cost;
+  }
+  return Math.floor(RARITIES[hamster.rarity].upgradeBase * 1.35 ** (level - 1));
+}
+
+function maxAllHamsters() {
+  const owned = HAMSTERS.filter(hamster => state.hamsters[hamster.id] && state.hamsters[hamster.id] < MAX_LEVEL);
+  if (!owned.length) {
+    showToast(HAMSTERS.some(hamster => state.hamsters[hamster.id]) ? "Tous tes hamsters sont déjà au max !" : "Tu n'as encore aucun hamster.");
+    return;
+  }
+  let spent = 0;
+  let upgrades = 0;
+  const touched = new Set();
+  for (;;) {
+    let cheapest = null;
+    let cheapestCost = Infinity;
+    for (const hamster of owned) {
+      const level = state.hamsters[hamster.id];
+      if (level >= MAX_LEVEL) continue;
+      const cost = getHamsterLevelCost(hamster, level);
+      if (cost < cheapestCost) { cheapest = hamster; cheapestCost = cost; }
+    }
+    if (!cheapest || cheapestCost > state.coins) break;
+    state.coins -= cheapestCost;
+    spent += cheapestCost;
+    state.hamsters[cheapest.id] += 1;
+    touched.add(cheapest.id);
+    upgrades += 1;
+  }
+  if (!upgrades) {
+    showToast("Pas assez de pièces pour améliorer un hamster.");
+    return;
+  }
+  renderHamsters();
+  updateDisplay();
+  saveState();
+  showToast(`${formatNumber(upgrades)} amélioration${upgrades > 1 ? "s" : ""} sur ${touched.size} hamster${touched.size > 1 ? "s" : ""} pour ${formatNumber(spent)} ◈.`);
+}
+
 function chooseHamster() {
   const roll = Math.random() * 100;
   let threshold = 0;
@@ -496,6 +603,8 @@ function spinRoulette() {
 
 elements.cube.addEventListener("click", handleClick);
 elements.upgrade.addEventListener("click", buyUpgrade);
+elements.upgradeMax.addEventListener("click", buyMaxUpgrade);
+elements.maxAll?.addEventListener("click", maxAllHamsters);
 elements.rouletteToggle.addEventListener("click", spinRoulette);
 elements.modalClose.addEventListener("click", closeRoulette);
 elements.modalBackdrop.addEventListener("click", closeRoulette);

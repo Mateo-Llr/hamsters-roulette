@@ -777,3 +777,32 @@ body { background: radial-gradient(ellipse at 50% 47%, rgba(90, 125, 65, .22), t
 .frenzy-banner i { background: #4a3913; }
 .frenzy-orb { border-color: #d9a33f; background: #3a2e12; color: #f4d98a; }
 .frenzy .rate-display b, .frenzy .balance-display strong { color: #f0b84a; }
+
+/* ===== Doigt turbo : deux boutons (+1 niveau / niveau max) qui se partagent l'ancienne largeur ===== */
+.upgrade-group { position: fixed; z-index: 9; bottom: 24px; left: 24px; display: flex; gap: 6px; width: 178px; }
+.upgrade-group .upgrade-orb {
+  position: static; flex: 1 1 0; min-width: 0; min-height: 56px; padding: 7px 6px;
+  flex-direction: column; justify-content: center; gap: 1px; border-radius: 22px; text-align: center;
+}
+.upgrade-group .upgrade-orb > span:first-child { font-size: 17px; line-height: 1; }
+.upgrade-group .upgrade-orb b { max-width: 100%; overflow: hidden; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.upgrade-group .upgrade-level { max-width: 100%; overflow: hidden; font-size: 8px; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+.upgrade-max { background: rgba(38, 52, 34, .92); }
+.upgrade-max b { color: #f5d996; }
+@media (max-width: 600px) {
+  .upgrade-group { bottom: 17px; left: 13px; width: 150px; gap: 5px; }
+  .upgrade-group .upgrade-orb { min-height: 52px; padding: 6px 4px; }
+  .upgrade-group .upgrade-orb .upgrade-level { display: block; font-size: 7.5px; }
+}
+
+/* ===== Collection : rangée raretés + bouton « Maxxer tout » à droite ===== */
+.dex-chiprow { display: flex; flex: 1 1 100%; align-items: center; gap: 10px; }
+.dex-chiprow .dex-chips { flex: 1 1 auto; min-width: 0; }
+.dex-maxall {
+  flex: 0 0 auto; align-self: flex-start; padding: 7px 14px; border: 1px solid #5b8f56; border-radius: 20px;
+  background: #426b3e; color: #fff; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.dex-maxall:hover { background: #4f7e4a; transform: translateY(-1px); }
+.dex-maxall:focus-visible { outline: 3px solid #a6c694; outline-offset: 2px; }
+@media (max-width: 600px) { .dex-chiprow { align-items: flex-start; } .dex-maxall { padding: 7px 10px; } }
