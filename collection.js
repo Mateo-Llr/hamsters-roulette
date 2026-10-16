@@ -153,3 +153,4 @@ document.addEventListener("keydown", event => {
 });
 
 refreshCollectionUI();
+updateDisplay();

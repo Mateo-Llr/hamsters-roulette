@@ -28,11 +28,12 @@ const elements = {
   maxAll: document.querySelector("#dex-maxall"),
   rouletteToggle: document.querySelector("#roulette-toggle"),
   spinCost: document.querySelector("#spin-cost"),
+  maxSpinCount: document.querySelector("#max-spin-count"),
+  spinQuantityButtons: [...document.querySelectorAll(".spin-quantity")],
   rouletteModal: document.querySelector("#roulette-modal"),
   modalClose: document.querySelector("#modal-close"),
   modalBackdrop: document.querySelector("#modal-backdrop"),
-  wheelStage: document.querySelector("#wheel-stage"),
-  reelTrack: document.querySelector("#reel-track"),
+  batchRouletteGrid: document.querySelector("#batch-roulette-grid"),
   wheelResult: document.querySelector("#wheel-result"),
   hamsterSwarm: document.querySelector("#hamster-swarm"),
   toast: document.querySelector("#toast")
@@ -79,6 +80,8 @@ function loadState() {
 let state = loadState();
 let storageWarningShown = false;
 let toastTimeout;
+let selectedSpinQuantity = 1;
+let selectedSpinMax = false;
 const hamsterSprites = new Map();
 let activeHamsterDrag = null;
 let hamsterAnimationFrame = 0;
@@ -139,25 +142,24 @@ function getUpgradeCost(level = state.clickUpgradeLevel) {
   return Math.floor(15 * (1.15 ** level));
 }
 
-// Combien de niveaux de doigt peut-on acheter d'un coup, et pour quel prix total ?
-function getMaxUpgradePlan() {
-  let level = state.clickUpgradeLevel;
-  let coins = state.coins;
+function getSpinBatchCost(quantity, purchases = state.roulettePurchases) {
   let total = 0;
-  let count = 0;
-  while (level < 1_000_000) {
-    const cost = getUpgradeCost(level);
-    if (coins < cost) break;
-    coins -= cost;
-    total += cost;
-    level += 1;
-    count += 1;
+  for (let index = 0; index < quantity; index += 1) {
+    total += Math.floor(30 * (purchases + index + 1) ** 2.2);
   }
-  return { count, total };
+  return total;
 }
 
-function getSpinCost() {
-  return Math.floor(30 * (state.roulettePurchases + 1) ** 2.2);
+function getMaxAffordableSpinCount() {
+  let count = 0;
+  let spent = 0;
+  while (count < Number.MAX_SAFE_INTEGER) {
+    const cost = Math.floor(30 * (state.roulettePurchases + count + 1) ** 2.2);
+    if (!Number.isFinite(cost) || spent + cost > state.coins) break;
+    spent += cost;
+    count += 1;
+  }
+  return count;
 }
 
 function updateDisplay() {
@@ -169,12 +171,22 @@ function updateDisplay() {
   elements.upgradeLevel.textContent = `Niv. ${formatNumber(state.clickUpgradeLevel)} · ×${getClickMilestone().toFixed(2).replace(".", ",")}`;
   elements.upgradeCost.textContent = formatNumber(getUpgradeCost());
   elements.upgrade.disabled = state.coins < getUpgradeCost();
-  const maxPlan = getMaxUpgradePlan();
-  elements.upgradeMax.disabled = maxPlan.count < 1;
-  elements.upgradeMaxCost.textContent = maxPlan.count ? formatNumber(maxPlan.total) : "MAX";
-  elements.upgradeMaxCount.textContent = `+${formatNumber(maxPlan.count)} niv.`;
-  elements.spinCost.textContent = formatNumber(getSpinCost());
-  elements.rouletteToggle.disabled = state.coins < getSpinCost() || elements.rouletteToggle.dataset.spinning === "true";
+  const maxPlan = planHamsterMax("all");
+  elements.upgradeMax.disabled = maxPlan.upgrades < 1;
+  elements.upgradeMaxCost.textContent = maxPlan.upgrades ? formatNumber(maxPlan.spent) : "MAX";
+  elements.upgradeMaxCount.textContent = `+${formatNumber(maxPlan.upgrades)} niv.`;
+  const maxSpinCount = getMaxAffordableSpinCount();
+  const spinQuantity = selectedSpinMax ? maxSpinCount : selectedSpinQuantity;
+  const spinBatchCost = spinQuantity ? getSpinBatchCost(spinQuantity) : 0;
+  elements.maxSpinCount.textContent = formatNumber(maxSpinCount);
+  elements.spinQuantityButtons.forEach(button => {
+    const isMax = button.dataset.quantity === "max";
+    button.setAttribute("aria-pressed", String(isMax ? selectedSpinMax : !selectedSpinMax && Number(button.dataset.quantity) === selectedSpinQuantity));
+    button.disabled = elements.rouletteToggle.dataset.spinning === "true" || (isMax && maxSpinCount === 0);
+  });
+  elements.spinCost.textContent = formatNumber(spinBatchCost);
+  elements.rouletteToggle.setAttribute("aria-label", `Lancer ${formatNumber(spinQuantity)} roulette${spinQuantity === 1 ? "" : "s"} pour ${formatNumber(spinBatchCost)} pièces`);
+  elements.rouletteToggle.disabled = spinQuantity === 0 || state.coins < spinBatchCost || elements.rouletteToggle.dataset.spinning === "true";
   if (typeof refreshCollectionUI === "function") refreshCollectionUI();
 }
 
@@ -469,54 +481,48 @@ function buyUpgrade() {
   showToast(`Doigt turbo niveau ${state.clickUpgradeLevel} !`);
 }
 
-function buyMaxUpgrade() {
-  const plan = getMaxUpgradePlan();
-  if (plan.count < 1) return;
-  state.coins -= plan.total;
-  state.clickUpgradeLevel += plan.count;
-  updateDisplay();
-  saveState();
-  showToast(`Doigt turbo niveau ${formatNumber(state.clickUpgradeLevel)} (+${formatNumber(plan.count)}) !`);
+/* Max hamsters : on dépense les pièces des hamsters les plus rares aux moins rares (à rareté égale, les plus
+   hauts niveaux d'abord). Chaque hamster est monté tant que c'est payable, puis on passe au suivant avec le reste.
+   Même coût que le bouton « Améliorer » de la fiche (getLevelUpCost, dans collection.js). */
+function planHamsterMax(rarity = "all", budget = state.coins) {
+  const plan = { upgrades: 0, spent: 0, levels: new Map() };
+  if (typeof getLevelUpCost !== "function") return plan;
+  const order = HAMSTERS
+    .filter(hamster => state.hamsters[hamster.id] && state.hamsters[hamster.id] < MAX_LEVEL && (rarity === "all" || hamster.rarity === rarity))
+    .sort((a, b) => SWARM_RARITY_RANK[a.rarity] - SWARM_RARITY_RANK[b.rarity]
+      || state.hamsters[b.id] - state.hamsters[a.id]
+      || a.name.localeCompare(b.name, "fr"));
+  let coins = budget;
+  for (const hamster of order) {
+    let level = state.hamsters[hamster.id];
+    while (level < MAX_LEVEL) {
+      const cost = getLevelUpCost(hamster, level);
+      if (cost > coins) break;
+      coins -= cost;
+      plan.spent += cost;
+      plan.upgrades += 1;
+      level += 1;
+    }
+    if (level !== state.hamsters[hamster.id]) plan.levels.set(hamster.id, level);
+    if (coins <= 0) break;
+  }
+  return plan;
 }
 
-/* Maxxer tout : monte les hamsters possédés (ceux de la rareté sélectionnée dans la collection, sinon tous),
-   le moins cher en premier, tant que les pièces suffisent. Même coût que le bouton « Améliorer » (getLevelUpCost). */
-function maxAllHamsters() {
-  const rarity = typeof dexView !== "undefined" ? dexView.rarity : "all";
-  const pool = HAMSTERS.filter(hamster => state.hamsters[hamster.id] && (rarity === "all" || hamster.rarity === rarity));
-  const upgradable = pool.filter(hamster => state.hamsters[hamster.id] < MAX_LEVEL);
-  if (!upgradable.length) {
-    showToast(pool.length ? "Ces hamsters sont déjà au max !" : "Tu n'as aucun hamster dans cette catégorie.");
+function maxHamsters(rarity = "all") {
+  const plan = planHamsterMax(rarity);
+  if (!plan.upgrades) {
+    const any = HAMSTERS.some(hamster => state.hamsters[hamster.id] && (rarity === "all" || hamster.rarity === rarity));
+    showToast(!any ? "Tu n'as aucun hamster dans cette catégorie." : "Pas assez de pièces (ou déjà tout au max).");
     return;
   }
-  let spent = 0;
-  let upgrades = 0;
-  const touched = new Set();
-  for (;;) {
-    let cheapest = null;
-    let cheapestCost = Infinity;
-    for (const hamster of upgradable) {
-      const level = state.hamsters[hamster.id];
-      if (level >= MAX_LEVEL) continue;
-      const cost = getLevelUpCost(hamster, level);
-      if (cost < cheapestCost) { cheapest = hamster; cheapestCost = cost; }
-    }
-    if (!cheapest || cheapestCost > state.coins) break;
-    state.coins -= cheapestCost;
-    spent += cheapestCost;
-    state.hamsters[cheapest.id] += 1;
-    touched.add(cheapest.id);
-    upgrades += 1;
-  }
-  if (!upgrades) {
-    showToast("Pas assez de pièces pour améliorer un hamster.");
-    return;
-  }
+  state.coins -= plan.spent;
+  for (const [id, level] of plan.levels) state.hamsters[id] = level;
   renderHamsters();
   updateDisplay();
   saveState();
   if (typeof renderCatalog === "function") renderCatalog();
-  showToast(`${formatNumber(upgrades)} amélioration${upgrades > 1 ? "s" : ""} sur ${touched.size} hamster${touched.size > 1 ? "s" : ""} pour ${formatNumber(spent)} ◈.`);
+  showToast(`${formatNumber(plan.upgrades)} niveau${plan.upgrades > 1 ? "x" : ""} sur ${plan.levels.size} hamster${plan.levels.size > 1 ? "s" : ""} pour ${formatNumber(plan.spent)} ◈, des plus rares aux moins rares.`);
 }
 
 function chooseHamster() {
@@ -530,17 +536,6 @@ function chooseHamster() {
   return candidates[Math.floor(Math.random() * candidates.length)];
 }
 
-function makeReel(winner) {
-  const winnerIndex = 34;
-  const reel = Array.from({ length: 42 }, chooseHamster);
-  reel[winnerIndex] = winner;
-  elements.reelTrack.innerHTML = reel.map(hamster => `<div class="reel-item rarity-${hamster.rarity}">
-    <img src="${hamster.image}" alt="">
-    <span>${RARITIES[hamster.rarity].label}</span>
-  </div>`).join("");
-  return winnerIndex;
-}
-
 function closeRoulette() {
   if (elements.rouletteToggle.dataset.spinning === "true") return;
   elements.rouletteModal.classList.remove("is-open");
@@ -548,57 +543,105 @@ function closeRoulette() {
 }
 
 function spinRoulette() {
-  const cost = getSpinCost();
-  if (state.coins < cost || elements.rouletteToggle.dataset.spinning === "true") return;
-  const hamster = chooseHamster();
-  const winnerIndex = makeReel(hamster);
+  const maxSpinCount = getMaxAffordableSpinCount();
+  const quantity = selectedSpinMax ? maxSpinCount : selectedSpinQuantity;
+  const cost = getSpinBatchCost(quantity);
+  if (!quantity || state.coins < cost || elements.rouletteToggle.dataset.spinning === "true") return;
+  const results = Array.from({ length: quantity }, () => chooseHamster());
+  const columns = Math.max(1, Math.min(quantity, Math.ceil(Math.sqrt(quantity * window.innerWidth / Math.max(240, window.innerHeight - 240)))));
+  const reelWinnerIndex = 15;
+  const reelLength = 21;
+  elements.batchRouletteGrid.style.setProperty("--batch-columns", columns);
+  elements.batchRouletteGrid.setAttribute("aria-label", "Roulettes en cours");
+  elements.batchRouletteGrid.innerHTML = results.map((hamster, index) => {
+    const reel = Array.from({ length: reelLength }, (_, reelIndex) => reelIndex === reelWinnerIndex ? hamster : chooseHamster());
+    return `
+    <article class="batch-roulette-card is-spinning">
+      <div class="batch-roulette-art">
+        <div class="batch-reel-window" aria-hidden="true">
+          <div class="batch-reel-track">${reel.map(candidate => `
+            <span class="batch-reel-item"><img src="${candidate.image}" alt=""></span>
+          `).join("")}</div>
+          <span class="batch-reel-pointer"></span>
+        </div>
+        <img src="${hamster.image}" alt="${hamster.name}">
+      </div>
+      <strong class="batch-roulette-name">Roulette ${index + 1}</strong>
+      <span class="batch-roulette-rarity">En cours…</span>
+    </article>
+  `;
+  }).join("");
   elements.rouletteToggle.dataset.spinning = "true";
-  elements.rouletteToggle.disabled = true;
   elements.rouletteModal.classList.add("is-open");
   elements.rouletteModal.setAttribute("aria-hidden", "false");
   elements.wheelResult.className = "wheel-result";
-  elements.wheelResult.textContent = "La roulette tourne…";
+  elements.wheelResult.textContent = `${formatNumber(quantity)} roulette${quantity === 1 ? "" : "s"} en cours…`;
   updateDisplay();
 
-  const firstCard = elements.reelTrack.firstElementChild;
-  const winnerCard = elements.reelTrack.children[winnerIndex];
-  const centerOffset = elements.wheelStage.clientWidth / 2 - firstCard.offsetWidth / 2;
-  const from = `translateX(${centerOffset}px)`;
-  const to = `translateX(${elements.wheelStage.clientWidth / 2 - winnerCard.offsetLeft - winnerCard.offsetWidth / 2}px)`;
-  elements.reelTrack.style.transform = from;
-  const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 100 : 5600;
-  elements.reelTrack.animate(
-    [{ transform: from }, { transform: to }],
-    { duration, easing: "cubic-bezier(.08,.72,.12,1)", fill: "forwards" }
-  );
+  const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 700 : 5600;
+  for (const card of elements.batchRouletteGrid.children) {
+    const reelWindow = card.querySelector(".batch-reel-window");
+    const reelTrack = card.querySelector(".batch-reel-track");
+    const reelItemSize = reelWindow.clientHeight;
+    reelTrack.style.setProperty("--reel-item-size", `${reelItemSize}px`);
+    const winnerCard = reelTrack.children[reelWinnerIndex];
+    const endOffset = reelWindow.clientWidth / 2 - winnerCard.offsetLeft - winnerCard.offsetWidth / 2;
+    reelTrack.animate(
+      [{ transform: "translateX(0px)" }, { transform: `translateX(${endOffset}px)` }],
+      { duration, easing: "cubic-bezier(.08,.72,.12,1)", fill: "forwards" }
+    );
+  }
 
   window.setTimeout(() => {
-    const previousLevel = state.hamsters[hamster.id] || 0;
-    const maxed = previousLevel >= MAX_LEVEL;
-    const refund = Math.floor(cost * 0.5);
+    let newHamsters = 0;
+    let levelUps = 0;
+    let refunds = 0;
+    for (const [index, hamster] of results.entries()) {
+      const previousLevel = state.hamsters[hamster.id] || 0;
+      const maxed = previousLevel >= MAX_LEVEL;
+      const refund = Math.floor(Math.floor(30 * (state.roulettePurchases + index + 1) ** 2.2) * 0.5);
+      if (maxed) {
+        state.coins += refund;
+        refunds += 1;
+      } else if (previousLevel) {
+        levelUps += 1;
+      } else {
+        newHamsters += 1;
+      }
+      state.hamsters[hamster.id] = Math.min(previousLevel + 1, MAX_LEVEL);
+      const card = elements.batchRouletteGrid.children[index];
+      card.className = `batch-roulette-card result-${hamster.rarity}`;
+      card.querySelector(".batch-roulette-name").textContent = hamster.name;
+      card.querySelector(".batch-roulette-rarity").textContent = RARITIES[hamster.rarity].label;
+    }
     state.coins -= cost;
-    if (maxed) state.coins += refund;
-    state.roulettePurchases += 1;
-    state.hamsters[hamster.id] = Math.min(previousLevel + 1, MAX_LEVEL);
+    state.roulettePurchases += quantity;
     elements.rouletteToggle.dataset.spinning = "false";
-    elements.reelTrack.style.transform = to;
-    elements.wheelResult.className = `wheel-result result-${hamster.rarity}`;
-    elements.wheelResult.textContent = maxed
-      ? `${hamster.name} est déjà au max : ${formatNumber(refund)} ◈ remboursées.`
-      : previousLevel
-      ? `${hamster.name} passe au niveau ${previousLevel + 1} !`
-      : `${hamster.name} rejoint ta tribu !`;
+    elements.batchRouletteGrid.setAttribute("aria-label", "Résultats des roulettes");
+    elements.wheelResult.className = "wheel-result";
+    elements.wheelResult.textContent = `${formatNumber(quantity)} roulette${quantity === 1 ? "" : "s"} terminée${quantity === 1 ? "" : "s"} : ${formatNumber(newHamsters)} nouveau${newHamsters === 1 ? "" : "x"} hamster${newHamsters === 1 ? "" : "s"}, ${formatNumber(levelUps)} niveau${levelUps === 1 ? "" : "x"} gagné${levelUps === 1 ? "" : "s"}${refunds ? `, ${formatNumber(refunds)} remboursement${refunds === 1 ? "" : "s"}` : ""}.`;
     renderHamsters();
     updateDisplay();
     saveState();
-    showToast(maxed ? `${hamster.name} est au max : ${formatNumber(refund)} ◈ remboursées.` : previousLevel ? `Doublon ! ${hamster.name} passe niveau ${previousLevel + 1}.` : `${hamster.name} rejoint ta tribu !`);
+    showToast(`${formatNumber(quantity)} roulette${quantity === 1 ? "" : "s"} terminée${quantity === 1 ? "" : "s"} !`);
   }, duration + 100);
 }
 
 elements.cube.addEventListener("click", handleClick);
 elements.upgrade.addEventListener("click", buyUpgrade);
-elements.upgradeMax.addEventListener("click", buyMaxUpgrade);
-elements.maxAll?.addEventListener("click", maxAllHamsters);
+elements.upgradeMax.addEventListener("click", () => maxHamsters("all"));
+elements.maxAll?.addEventListener("click", () => maxHamsters(typeof dexView !== "undefined" ? dexView.rarity : "all"));
+elements.spinQuantityButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    if (button.dataset.quantity === "max") {
+      selectedSpinMax = true;
+    } else {
+      selectedSpinMax = false;
+      selectedSpinQuantity = Number(button.dataset.quantity);
+    }
+    updateDisplay();
+  });
+});
 elements.rouletteToggle.addEventListener("click", spinRoulette);
 elements.modalClose.addEventListener("click", closeRoulette);
 elements.modalBackdrop.addEventListener("click", closeRoulette);

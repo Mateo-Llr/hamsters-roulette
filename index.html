@@ -6,9 +6,9 @@
     <meta name="theme-color" content="#0e110e">
     <meta name="description" content="Clique, fais tourner la roulette et collectionne des hamsters toujours plus rentables.">
     <title>Hamster Roulette — le clicker qui a du poil</title>
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=11">
     <script src="hamster-catalog.js?v=1" defer></script>
-    <script src="game.js?v=9" defer></script>
+    <script src="game.js?v=13" defer></script>
     <script src="collection.js?v=1" defer></script>
   </head>
   <body>
@@ -46,14 +46,24 @@
           <span aria-hidden="true">👆</span><b id="upgrade-cost">20</b>
           <span class="upgrade-level" id="upgrade-level">Niv. 0</span>
         </button>
-        <button class="upgrade-orb upgrade-max" id="click-upgrade-max" type="button" aria-label="Mettre la valeur du clic au niveau maximum possible">
+        <button class="upgrade-orb upgrade-max" id="click-upgrade-max" type="button" aria-label="Monter un maximum de hamsters, des plus rares aux moins rares">
           <span aria-hidden="true">⏫</span><b id="upgrade-max-cost">MAX</b>
           <span class="upgrade-level" id="upgrade-max-count">+0 niv.</span>
         </button>
       </div>
-      <button class="roulette-orb" id="roulette-toggle" type="button" aria-label="Ouvrir la roulette">
-        <span aria-hidden="true">🎰</span><b id="spin-cost">25</b>
-      </button>
+      <div class="roulette-controls">
+        <div class="spin-quantity-controls" role="group" aria-label="Nombre de roulettes">
+          <button class="spin-quantity" type="button" data-quantity="1" aria-pressed="true">1</button>
+          <button class="spin-quantity" type="button" data-quantity="5" aria-pressed="false">5</button>
+          <button class="spin-quantity" type="button" data-quantity="10" aria-pressed="false">10</button>
+          <button class="spin-quantity spin-quantity-max" type="button" data-quantity="max" aria-pressed="false">
+            <span>MAX</span><small id="max-spin-count">0</small>
+          </button>
+        </div>
+        <button class="roulette-orb" id="roulette-toggle" type="button" aria-label="Lancer la roulette">
+          <span aria-hidden="true">🎰</span><b id="spin-cost">30</b>
+        </button>
+      </div>
       <button class="collection-orb" id="catalog-toggle" type="button" aria-label="Ouvrir la collection">
         <span aria-hidden="true">📖</span><b id="catalog-progress">0/430</b>
       </button>
@@ -65,10 +75,7 @@
         <button class="modal-close" id="modal-close" type="button" aria-label="Fermer">×</button>
         <p class="roulette-eyebrow">HAMSTER ROULETTE</p>
         <h1 id="roulette-heading">À toi la chance.</h1>
-        <div class="reel-window" id="wheel-stage">
-          <span class="reel-pointer" aria-hidden="true"></span>
-          <div class="reel-track" id="reel-track"></div>
-        </div>
+        <div class="batch-roulette-grid" id="batch-roulette-grid" aria-label="Roulettes en cours"></div>
         <p class="wheel-result" id="wheel-result" aria-live="polite">La prochaine star de ta tribu ?</p>
         <div class="rarity-legend" aria-label="Probabilités">
           <span class="legend-common">Commun 58 %</span>
